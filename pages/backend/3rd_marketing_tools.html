@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Multi-vendor E-commerce Platform">
+  <title>Analytics Script</title>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../../assets/images/favicon.png" type="image/x-icon">
+
+  <!-- CSS Libraries -->
+  <link rel="stylesheet" href="../../assets/backend/css/vendor/all.min.css">
+  <link rel="stylesheet" href="../../assets/backend/css/vendor/bootstrap.min.css">
+  <link rel="stylesheet" href="../../assets/backend/css/vendor/swiper-bundle.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../../assets/backend/css/style.css">
+  <link rel="stylesheet" href="../../assets/backend/css/global.css">
+  <link rel="stylesheet" href="../../assets/backend/css/responsive.css">
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <!-- Leaflet Geocoder (Search Box) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+  <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+  <style>
+    .filter-item {
+        background: #f5f5f5;
+        border-radius: 8px;
+        padding: 12px;
+        text-align: center;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all .3s;
+        box-shadow: 0 2px 6px rgba(0,0,0,.1);
+        white-space: normal;   
+        word-wrap: break-word; 
+    }
+    .filter-item:hover {
+         background: #e0e0e0; 
+    }
+    .filter-item.active {
+         background: #fff; 
+    }
+    @media (max-width: 576px) {
+    .filter-item {
+        font-size: 14px;
+        padding: 10px;
+    }
+    .col-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    }
+    .pixel-card {
+      background: #fff;
+      border: 1px solid #e6e6e6;
+      border-radius: 8px;
+      padding: 18px 20px;
+      margin-bottom: 16px;
+      transition: box-shadow 0.2s ease;
+    }
+    .pixel-card:hover { box-shadow: 0 2px 10px rgba(0,0,0,0.04); }
+
+    .view-toggle {
+      cursor: pointer;
+      color: #28a745;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      user-select: none;
+    }
+    .view-toggle .caret {
+      transition: transform 0.2s ease;
+      margin-left: 3px;
+    }
+    .view-toggle.expanded .caret {
+      transform: rotate(180deg);
+    }
+
+    .pixel-extra {
+      display: none;
+      margin-top: 15px;
+      border-top: 1px solid #eaeaea;
+      padding-top: 15px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <!-- Dashboard Area Start -->
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-container">
+          <div class="logo-icon">
+            <i class="fa fa-shopping-cart"></i>
+          </div>
+          <span class="logo-text">Dotvalley</span>
+        </div>
+        <button class="sidebar-toggle"><i class="fa fa-bars"></i></button>
+      </div>
+      <div class="sidebar-search">
+        <div class="search-container">
+          <i class="fa fa-search search-icon"></i>
+          <input type="text" placeholder="Search menu">
+        </div>
+      </div>
+      <nav class="sidebar-menu">
+        <ul>
+          <li class="menu-item ">
+            <a href="dashboard.html">
+              <i class="fa fa-home"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="blank.html">
+              <i class="fa-solid fa-cart-shopping"></i>
+              <span>POS</span>
+            </a>
+          </li>
+
+          <li class="menu-section">Order Management</li>
+
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa fa-gift"></i>
+              <span>Orders</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item ">
+                <a href="all_order.html">
+                  <span>All</span>
+                  <span class="count">195</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="#orders-pending">
+                  <span>Pending</span>
+                  <span class="count">59</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="#orders-confirmed">
+                  <span>Confirmed</span>
+                  <span class="count">21</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="#orders-packaging">
+                  <span>Packaging</span>
+                  <span class="count">9</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="#orders-delivery">
+                  <span>Out for delivery</span>
+                  <span class="count">7</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="#orders-delivered">
+                  <span>Delivered</span>
+                  <span class="count delivered">80</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="#orders-returned">
+                  <span>Returned</span>
+                  <span class="count returned">4</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="#orders-failed">
+                  <span>Failed to Deliver</span>
+                  <span class="count failed">6</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="#orders-canceled">
+                  <span>Canceled</span>
+                  <span class="count canceled">6</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa-solid fa-money-bill-transfer"></i>
+              <span>Refund Requests</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="refund_request_pending.html">
+                  <span>Pending</span>
+                  <span class="count returned">12</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="refund_request_approved.html">
+                  <span>Approved</span>
+                  <span class="count delivered">5</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="refund_request_refunded.html">
+                  <span>Refunded</span>
+                  <span class="count returned">4</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="refund_request_rejected.html">
+                  <span>Rejected</span>
+                  <span class="count returned">3</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="menu-section">Product Management</li>
+
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa fa-th-large"></i>
+              <span>Category Setup</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="add_category.html">
+                  <span>Categories</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="add_subcategory.html">
+                  <span>Sub Categories</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa fa-tags"></i>
+              <span>Brands</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="brand_add.html">
+                  <span>Add New</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="brand_list.html">
+                  <span>List</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="menu-item">
+            <a href="attribute_setup.html">
+              <i class="fa-solid fa-sliders"></i>
+              <span>Product Attribute Setup</span>
+            </a>
+          </li>
+
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa fa-store"></i>
+              <span>In House Products</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="inhouse_product_list.html">
+                  <span>Product List</span>
+                  <span class="count delivered">8</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="inhouse_add_new_product.html">
+                  <span>Add New Product</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="inhouse_bulk_import.html">
+                  <span>Bulk Import</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="inhouse_request_restock_list.html">
+                  <span>Request Restock List</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa fa-user-tag"></i>
+              <span>Vendor Products</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="vendor_new_product_list.html">
+                  <span>New Products List</span>
+                  <span class="count returned">8</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="vendor_update_product_request.html">
+                  <span>Product Update Request</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="vendor_approve_product.html">
+                  <span>Approved Products</span>
+                  <span class="count delivered">8</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="menu-item">
+            <a href="product_gallery.html">
+              <i class="fa-solid fa-images"></i>
+              <span>Product Gallery</span>
+            </a>
+          </li>
+          <li class="menu-section">Promotion Management</li>
+          <li class="menu-item">
+            <a href="banner_setup.html">
+              <i class="fa-solid fa-play"></i>
+              <span>Banner Setup</span>
+            </a>
+          </li>
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa-regular fa-folder-open"></i>
+              <span>Offers & Deals</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="coupon.html">
+                  <span>Coupon</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="flash_deal.html">
+                  <span>Flash Deals</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="deal_of_the_day.html">
+                  <span>Deal of The Day</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa-solid fa-bell"></i>
+              <span>Notification</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="notification_send.html">
+                  <span>Send Notification</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="vendor_update_product_request.html">
+                  <span>Push Notification Setup</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="menu-item">
+            <a href="announcement.html">
+              <i class="fa-solid fa-bullhorn"></i>
+              <span>Announcement</span>
+            </a>
+          </li>
+          <li class="menu-section">User Management</li>
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa-solid fa-users"></i>
+              <span>Customers</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="customer_list.html">
+                  <span>Customer List</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="customer_review.html">
+                  <span>Customer Reviews</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="customer_wallet.html">
+                  <span>Wallet</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="customer_wallet_bonus_setup.html">
+                  <span>Wallet Bonus Setup</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="customer_loyality_point_report.html">
+                  <span>Loyality Points</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa-solid fa-user"></i>
+              <span>Vendors</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="vendor_add_new.html">
+                  <span>Add New Vendor</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="vendor_list.html">
+                  <span>Vendor List</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="vendor_withdraw.html">
+                  <span>Withdraws</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="vendor_withdraw_method_list.html">
+                  <span>Withdrawal Methods</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa-solid fa-truck-fast"></i>
+              <span>Delivery Man</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="delivery_add_new_man.html">
+                  <span>Add New</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="delivery_man_list.html">
+                  <span>List</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="delivery_man_withdraws.html">
+                  <span>Withdraws</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="delivery_man_emergency_contact.html">
+                  <span>Emergency Contact</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa-solid fa-user-group"></i>
+              <span>Employees</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="employee_role_setup.html">
+                  <span>Employees Role Setup</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="">
+                  <span>Employees</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="">
+                  <span>Add New</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="menu-section">Business Settings</li>
+          <li class="menu-item">
+            <a href="">
+              <i class="fa fa-solid fa-gear"></i>
+              <span>Business Setup</span>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="">
+              <i class="fa fa-solid fa-shop"></i>
+              <span>Inhouse Shop</span>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="">
+              <i class="fa fa-solid fa-magnifying-glass"></i>
+              <span>SEO Settings</span>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="">
+              <i class="fa fa-solid fa-screwdriver-wrench"></i>
+              <span>Priority Setup</span>
+            </a>
+          </li>
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa-solid fa-photo-film"></i>
+              <span>Pages & Media</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="employee_role_setup.html">
+                  <span>System Setup</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="">
+                  <span>Login Settings</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="">
+                  <span>Email Template</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="">
+                  <span>Gallery</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="menu-item has-submenu bg-secondary-light">
+            <div class="menu-link">
+              <i class="fa-solid fa-sliders"></i>
+              <span>System Settings</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="ss_system_setup.html">
+                  <span>System Setup</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="ss_login_settings.html">
+                  <span>Login Settings</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="ss_email_template.html">
+                  <span>Email Template</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="">
+                  <span>Gallery</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="menu-item has-submenu bg-primary-light">
+            <div class="menu-link">
+              <i class="fa fa-solid fa-users-gear"></i>
+              <span>3rd Party Setup</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="3rd_digital_payment_setup.html">
+                  <span>Payment methods</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="3rd_firebase_configuration.html">
+                  <span>Firebase</span>
+                </a>
+              </li>
+              <li class="submenu-item active">
+                <a href="3rd_marketing_tools.html">
+                  <span>Marketing Tools</span>
+                </a>
+              </li>
+              <li class="submenu-item  ">
+                <a href="3rd_party_otherconfigaration.html">
+                  <span>Other Configuration</span>
+                </a>
+              </li>
+              
+            </ul>
+          </li>
+          
+          <li class="menu-item logout-active my-3">
+            <div class="menu-link">
+              <i class="fa fa-right-from-bracket"></i>
+              <span>Logout</span>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+    <!-- Main Section Start -->
+    <main class="main-content">
+      <!-- Dashboard Header Section Start -->
+      <header class="dashboard-header">
+        <div class="header-search-section">
+          <div class="search-container">
+            <input type="text" class="search-product" placeholder="Search product">
+            <button class="search-btn">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button class="action-btn" title="Language">
+            <i class="fa fa-globe"></i>
+          </button>
+          <button class="action-btn" title="Country">
+            <img src="../../assets/backend/images/flags/us.png" alt="EN" class="flag-icon">
+          </button>
+          <button class="action-btn" title="Messages">
+            <i class="fa fa-comments"></i>
+            <span class="notification-badge">3</span>
+          </button>
+          <button class="action-btn" title="Orders">
+            <i class="fa fa-shopping-bag"></i>
+            <span class="notification-badge">1</span>
+          </button>
+          <div class="user-dropdown">
+            <button class="action-btn user-btn" title="User Profile">
+              <i class="fa fa-user"></i>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-header">
+                <img src="../../assets/backend/images/admin.png" alt="Admin" class="user-avatar">
+                <div class="user-info">
+                  <h6>Admin User</h6>
+                  <span>admin@dotvalley.com</span>
+                </div>
+              </div>
+              <div class="dropdown-divider"></div>
+              <a href="https://facebook.com" class="dropdown-item">
+                <i class="fa fa-user-circle"></i>
+                <span>Update Profile</span>
+              </a>
+              <a href="https://youtube.com" class="dropdown-item">
+                <i class="fa fa-cog"></i>
+                <span>Settings</span>
+              </a>
+              <a href="#help" class="dropdown-item">
+                <i class="fa fa-question-circle"></i>
+                <span>Help & Support</span>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#logout" class="dropdown-item logout-item">
+                <i class="fa fa-sign-out-alt"></i>
+                <span>Logout</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </header>
+      <!-- Dashboard Header Section End -->
+      <section id="paymentMethods" class="pg-wrap container my-4 buiness-setup-section">
+        <!-- Header -->
+        <div class="all-orders mb-3">
+          <header class="d-flex justify-content-between align-items-center mb-4">
+            <div class="header-title">
+              <img src="../../assets/backend/images/repire.png" alt="Gallery">
+              <h1>Marketing Tools</h1>
+            </div>
+          </header>
+          <div class="alert alert-success small mb-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                class="me-2">
+                <path
+                    d="M2.606 0.135742L1.9402 0.838742L2.93086 1.88574L3.59571 1.18274L2.606 0.135742ZM11.295 0.135742L10.3043 1.18274L10.9696 1.88574L11.9598 0.839242L11.295 0.135742ZM6.95025 0.447742C6.7942 0.449076 6.63658 0.459742 6.47738 0.479742H6.46319C4.54523 0.712242 3.01881 2.35074 2.75353 4.36974C2.54169 5.99474 3.17533 7.46824 4.23125 8.41724C4.66311 8.80707 4.95525 9.3419 5.05877 9.93224V12.9322H6.13691C6.30147 13.2307 6.60174 13.4322 6.95025 13.4322C7.29875 13.4322 7.59902 13.2307 7.76358 12.9322H8.84172V10.9322H8.88617V10.3382C8.88617 9.60524 9.2465 8.86624 9.83191 8.29174C10.615 7.46274 11.2061 6.28524 11.2061 4.93274C11.2061 2.46274 9.28338 0.424742 6.95025 0.447742ZM6.95025 1.44774C8.77789 1.42074 10.2603 3.00274 10.2603 4.93274C10.2603 5.97974 9.80165 6.90174 9.16658 7.57274L9.18172 7.58874C8.55087 8.2043 8.14283 9.03325 8.02792 9.93274H5.95959C5.85555 9.07574 5.508 8.24624 4.85118 7.65124C4.01562 6.90124 3.51769 5.77124 3.68414 4.49524C3.89078 2.92024 5.09944 1.65374 6.58046 1.48024C6.70275 1.46231 6.82589 1.45163 6.9493 1.44824L6.95025 1.44774ZM0.330078 4.93274V5.93274H1.74869V4.93274H0.330078ZM12.1518 4.93274V5.93274H13.5704V4.93274H12.1518ZM2.93086 8.97974L1.94067 10.0262L2.606 10.7297L3.59524 9.68274L2.93086 8.97974ZM10.9696 8.97974L10.3048 9.68274L11.2945 10.7297L11.9598 10.0262L10.9696 8.97974ZM6.00451 10.9327H7.89599V11.9327H6.00451V10.9327Z"
+                    fill="#27AE60" />
+                </svg>
+                In this page you can add credentials to show your analytics on the platform make sure fill with proper data other wise you can not see the analytics properly .
+            </div>
+        </div>
+        <div class="card-custom my-4">
+            <div class="row g-3">
+                <!-- google tag manager -->
+                <div class="col-md-6">
+                <div class="pixel-card">
+                    <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="fw-semibold mb-0">google tag manager</h6>
+                        <small class="text-muted">To know more click <a href="#" class="text-success text-decoration-none fw-semibold">How it works.</a></small>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <span class="view-toggle" data-expanded="false"><span>View</span> <i class="fa-solid fa-arrow-down caret"></i></span>
+                        <div class="form-check form-switch">
+                        <input class="form-check-input modal-toggle" type="checkbox"
+                                data-title-on="Turn on google tag manager?"
+                                data-subtitle-on="Are you sure to turn on the google tag manager? Enable this option to make the marketing tool available for website utilization."
+                                data-title-off="Turn OFF google tag manager?"
+                                data-subtitle-off="Are you sure to turn on the google tag manager? Enable this option to make the marketing tool available for website utilization."
+                                data-icon="../../assets/backend/images/google.png">
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="pixel-extra">
+                    <label class="form-label mt-2">google tag manager Measurement ID</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Enter the GA Measurement ID">
+                        <button class="btn btn-success">Save</button>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <!-- Google Tag Manager -->
+                <div class="col-md-6">
+                <div class="pixel-card">
+                    <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="fw-semibold mb-0">Google Tag Manager</h6>
+                        <small class="text-muted">To know more click <a href="#" class="text-success text-decoration-none fw-semibold">How it works.</a></small>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <span class="view-toggle" data-expanded="false"><span>View</span> <i class="fa-solid fa-arrow-down caret"></i></span>
+                        <div class="form-check form-switch">
+                        <input class="form-check-input modal-toggle" type="checkbox"
+                                data-title-on="Turn on google tag manager?"
+                                data-subtitle-on="Are you sure to turn on the google tag manager? Enable this option to make the marketing tool available for website utilization."
+                                data-title-off="Turn OFF google tag manager?"
+                                data-subtitle-off="Are you sure to turn on the google tag manager? Enable this option to make the marketing tool available for website utilization."
+                                data-icon="../../assets/backend/images/google.png">
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="pixel-extra">
+                    <label class="form-label mt-2">google tag manager Measurement ID</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Enter the GA Container ID">
+                        <button class="btn btn-success">Save</button>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <!-- LinkedIn -->
+                <div class="col-md-6">
+                <div class="pixel-card">
+                    <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="fw-semibold mb-0">LinkedIn Insight Tag</h6>
+                        <small class="text-muted">To know more click <a href="#" class="text-success text-decoration-none fw-semibold">How it works.</a></small>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <span class="view-toggle" data-expanded="false"><span>View</span> <i class="fa-solid fa-arrow-down caret"></i></span>
+                        <div class="form-check form-switch">
+                        <input class="form-check-input modal-toggle" type="checkbox"
+                                data-title-on="Turn on linkedin insight?"
+                                data-subtitle-on="Are you sure to turn on the linkedin insight? Enable this option to make the marketing tool available for website utilization."
+                                data-title-off="Turn OFF linkedin insight?"
+                                data-subtitle-off="Are you sure to turn on the linkedin insight? Enable this option to make the marketing tool available for website utilization."
+                                data-icon="../../assets/backend/images/linkedin.png">
+                        </div>
+                    </div>
+                    </div>
+                    <div class="pixel-extra">
+                    <label class="form-label mt-2">LinkedIn Tag ID</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Enter Tag ID">
+                        <button class="btn btn-success">Save</button>
+                    </div>
+                    </div>
+                </div>
+                </div>
+
+                <!-- Meta Pixel -->
+                <div class="col-md-6">
+                <div class="pixel-card">
+                    <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="fw-semibold mb-0">Meta Pixel</h6>
+                        <small class="text-muted">To know more click <a href="#" class="text-success text-decoration-none fw-semibold">How it works.</a></small>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <span class="view-toggle" data-expanded="false"><span>View</span> <i class="fa-solid fa-arrow-down caret"></i></span>
+                        <div class="form-check form-switch">
+                        <input class="form-check-input modal-toggle" type="checkbox"
+                                data-title-on="Turn on Meta Mixel?"
+                                data-subtitle-on="Are you sure to turn on the Meta Mixel? Enable this option to make the marketing tool available for website utilization."
+                                data-title-off="Turn OFF Meta Mixel?"
+                                data-subtitle-off="Are you sure to turn on the Meta Mixel? Enable this option to make the marketing tool available for website utilization."
+                                data-icon="../../assets/backend/images/meta.png">
+                        </div>
+                    </div>
+                    </div>
+                    <div class="pixel-extra">
+                    <label class="form-label mt-2">Meta Tag ID</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Enter Pixel ID">
+                        <button class="btn btn-success">Save</button>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                <!-- Pinterest Pixel -->
+                <div class="col-md-6">
+                <div class="pixel-card">
+                    <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="fw-semibold mb-0">Pinterest Pixel</h6>
+                        <small class="text-muted">To know more click <a href="#" class="text-success text-decoration-none fw-semibold">How it works.</a></small>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <span class="view-toggle" data-expanded="false"><span>View</span> <i class="fa-solid fa-arrow-down caret"></i></span>
+                        <div class="form-check form-switch">
+                        <input class="form-check-input modal-toggle" type="checkbox"
+                                data-title-on="Turn on Pinterest Pixel?"
+                                data-subtitle-on="Are you sure to turn on the Pinterest Pixel? Enable this option to make the marketing tool available for website utilization."
+                                data-title-off="Turn OFF Pinterest Pixel?"
+                                data-subtitle-off="Are you sure to turn on the Pinterest Pixel? Enable this option to make the marketing tool available for website utilization."
+                                data-icon="../../assets/backend/images/pinterest.png">
+                        </div>
+                    </div>
+                    </div>
+                    <div class="pixel-extra">
+                    <label class="form-label mt-2">Pinterest Tag ID</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Enter Pixel ID">
+                        <button class="btn btn-success">Save</button>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                <!-- Snapchat Pixel-->
+                <div class="col-md-6">
+                <div class="pixel-card">
+                    <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="fw-semibold mb-0">Snapchat Pixel</h6>
+                        <small class="text-muted">To know more click <a href="#" class="text-success text-decoration-none fw-semibold">How it works.</a></small>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <span class="view-toggle" data-expanded="false"><span>View</span> <i class="fa-solid fa-arrow-down caret"></i></span>
+                        <div class="form-check form-switch">
+                        <input class="form-check-input modal-toggle" type="checkbox"
+                                data-title-on="Turn on Snapchat Pixel?"
+                                data-subtitle-on="Are you sure to turn on the Snapchat Pixel? Enable this option to make the marketing tool available for website utilization."
+                                data-title-off="Turn OFF Snapchat Pixel?"
+                                data-subtitle-off="Are you sure to turn on the Snapchat Pixel? Enable this option to make the marketing tool available for website utilization."
+                                data-icon="../../assets/backend/images/snapchat.png">
+                        </div>
+                    </div>
+                    </div>
+                    <div class="pixel-extra">
+                    <label class="form-label mt-2">Snapchat Tag ID</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Enter Pixel ID">
+                        <button class="btn btn-success">Save</button>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                <!-- TikTok Pixel -->
+                <div class="col-md-6">
+                <div class="pixel-card">
+                    <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="fw-semibold mb-0">TikTok Pixel</h6>
+                        <small class="text-muted">To know more click <a href="#" class="text-success text-decoration-none fw-semibold">How it works.</a></small>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <span class="view-toggle" data-expanded="false"><span>View</span> <i class="fa-solid fa-arrow-down caret"></i></span>
+                        <div class="form-check form-switch">
+                        <input class="form-check-input modal-toggle" type="checkbox"
+                                data-title-on="Turn on TikTok Pixel?"
+                                data-subtitle-on="Are you sure to turn on the TikTok Pixel? Enable this option to make the marketing tool available for website utilization."
+                                data-title-off="Turn OFF TikTok Pixel?"
+                                data-subtitle-off="Are you sure to turn on the TikTok Pixel? Enable this option to make the marketing tool available for website utilization."
+                                data-icon="../../assets/backend/images/tiktok.png">
+                        </div>
+                    </div>
+                    </div>
+                    <div class="pixel-extra">
+                    <label class="form-label mt-2">TikTok Tag ID</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Enter Pixel ID">
+                        <button class="btn btn-success">Save</button>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                <!-- X (Twitter) Pixel -->
+                <div class="col-md-6">
+                <div class="pixel-card">
+                    <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="fw-semibold mb-0">X (Twitter) Pixel</h6>
+                        <small class="text-muted">To know more click <a href="#" class="text-success text-decoration-none fw-semibold">How it works.</a></small>
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <span class="view-toggle" data-expanded="false"><span>View</span> <i class="fa-solid fa-arrow-down caret"></i></span>
+                        <div class="form-check form-switch">
+                        <input class="form-check-input modal-toggle" type="checkbox"
+                                data-title-on="Turn on X (Twitter) Pixel?"
+                                data-subtitle-on="Are you sure to turn on the X (Twitter) Pixel? Enable this option to make the marketing tool available for website utilization."
+                                data-title-off="Turn OFF X (Twitter) Pixel?"
+                                data-subtitle-off="Are you sure to turn on the X (Twitter) Pixel? Enable this option to make the marketing tool available for website utilization."
+                                data-icon="../../assets/backend/images/x.png">
+                        </div>
+                    </div>
+                    </div>
+                    <div class="pixel-extra">
+                    <label class="form-label mt-2">X (Twitter) Tag ID</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Enter Pixel ID">
+                        <button class="btn btn-success">Save</button>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        
+
+        
+
+      </section>
+
+
+    </main>
+    <!-- Main Section End -->
+  </div>
+  <!-- Dashboard Area End -->
+  <div class="modal fade" id="toggleConfirmModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-center p-4" style="border-radius:12px;">
+
+        <!-- Icon -->
+        <div class="mb-3">
+            <img id="ModalIcon" src="" alt="Icon" style="width:100px; height:auto;">
+        </div>
+
+        <!-- Title -->
+        <h5 id="ModalTitle" class="fw-bold mb-2" style="color:#27AE60;"></h5>
+
+        <!-- Subtitle -->
+        <p id="ModalSubtitle" class="text-muted small mb-4"></p>
+
+        <!-- Buttons -->
+        <div class="d-flex justify-content-center gap-3">
+            <button type="button" class="btn btn-light px-4" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-success px-4" id="ConfirmBtn">OK</button>
+        </div>
+        </div>
+    </div>
+   </div>
+
+   <div class="modal fade" id="howItWorksModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content text-center p-4" style="border-radius: 14px; max-width: 750px; margin:auto;">
+      
+      <!-- Close Button -->
+      <button type="button" class="btn-close position-absolute end-0 top-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
+
+      <!-- Brand Icon -->
+      <div class="mb-3 mt-3">
+        <img id="howIcon" src="" alt="Brand Icon" style="width:80px; height:auto;">
+      </div>
+
+      <!-- Title -->
+      <h5 id="howTitle" class="fw-bold mb-3 text-capitalize"></h5>
+
+      <!-- Description -->
+      <div id="howContent" class="text-start px-3 pb-2" style="max-width:700px; margin:auto;">
+        <!-- Dynamic content will load here -->
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- JS Libraries -->
+
+    <script src="../../assets/backend/js/vendor/jquery-3.7.1.min.js"></script>
+    <script src="../../assets/backend/js/app.js"></script> 
+    <script src="../../assets/backend/js/vendor/all.min.js"></script>
+    <script src="../../assets/backend/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/backend/js/vendor/swiper-bundle.min.js"></script>
+    <script src="../../assets/backend/js/vendor/chart-4.5.0.js"></script>
+    <script src="../../assets/backend/js/vendor/popper.min.js"></script>
+     <script>
+        // View button toggle logic
+        document.querySelectorAll('.view-toggle').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const card = btn.closest('.pixel-card');
+            const extra = card.querySelector('.pixel-extra');
+            const expanded = btn.getAttribute('data-expanded') === 'true';
+            if (expanded) {
+            extra.style.display = 'none';
+            btn.setAttribute('data-expanded', 'false');
+            btn.classList.remove('expanded');
+            } else {
+            extra.style.display = 'block';
+            btn.setAttribute('data-expanded', 'true');
+            btn.classList.add('expanded');
+            }
+        });
+        });
+
+        const toggolModal = document.getElementById('toggleConfirmModal');
+        const modalIcon = document.getElementById('ModalIcon');
+        const modalTitle = document.getElementById('ModalTitle');
+        const modalSubtitle = document.getElementById('ModalSubtitle');
+        const confirmBtn = document.getElementById('ConfirmBtn');
+        let currentToggle = null;
+        let intendedState = false;
+
+        document.querySelectorAll('.modal-toggle').forEach(toggle => {
+            toggle.addEventListener('change', function (e) {
+            e.preventDefault();
+            currentToggle = this;
+            intendedState = this.checked;
+
+            // reset checkbox until user confirms
+            this.checked = !intendedState;
+
+            // update modal content
+            modalIcon.src = this.dataset.icon;
+            modalTitle.innerText = intendedState
+                ? this.dataset.titleOn
+                : this.dataset.titleOff;
+            modalSubtitle.innerText = intendedState
+                ? this.dataset.subtitleOn
+                : this.dataset.subtitleOff;
+
+            // show modal
+            const bsModal = new bootstrap.Modal(toggolModal);
+            bsModal.show();
+
+            // confirm handler
+            confirmBtn.onclick = () => {
+                currentToggle.checked = intendedState;
+                bsModal.hide();
+            };
+            });
+        });
+
+        const howModal = new bootstrap.Modal(document.getElementById('howItWorksModal'));
+const howIcon = document.getElementById('howIcon');
+const howTitle = document.getElementById('howTitle');
+const howContent = document.getElementById('howContent');
+
+// Click event for "How it works" links
+document.querySelectorAll('.text-success.text-decoration-none.fw-semibold').forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    
+    const parent = this.closest('.pixel-card');
+    const title = parent.querySelector('h6').innerText.trim();
+
+    let iconSrc = "";
+    let contentHTML = "";
+
+    // Define modal data for each platform
+    switch (true) {
+      case title.toLowerCase().includes("google analytics"):
+        iconSrc = "../../assets/backend/images/google.png";
+        contentHTML = `
+          <h6 class="fw-semibold mb-2">How to get the Google Analytics Measurement ID</h6>
+          <p>To find your Google Analytics Measurement ID, log into your Google Analytics account. 
+          Go to <b>Admin</b> → <b>Data Streams</b> → Select your web data stream. Your Measurement ID (G-XXXXXXX) will appear — copy it.</p>
+          <h6 class="fw-semibold mt-4 mb-2">Where to use it</h6>
+          <p>Go to <b>Marketing Tools → Google Analytics</b> section, toggle it ON, and paste your ID in the input field.</p>
+        `;
+        break;
+
+      case title.toLowerCase().includes("tag manager"):
+        iconSrc = "../../assets/backend/images/google.png";
+        contentHTML = `
+          <h6 class="fw-semibold mb-2">How to get the Google Tag Manager Container ID</h6>
+          <p>Login to Google Tag Manager → Open your container → Go to <b>Admin</b>. 
+          The Container ID (GTM-XXXXXX) appears at the top of the screen. Copy it.</p>
+          <h6 class="fw-semibold mt-4 mb-2">Where to use it</h6>
+          <p>Go to <b>Marketing Tools → Google Tag Manager</b> section, toggle it ON, and paste your container ID in the input field.</p>
+        `;
+        break;
+
+      case title.toLowerCase().includes("linkedin"):
+        iconSrc = "../../assets/backend/images/linkedin.png";
+        contentHTML = `
+          <h6 class="fw-semibold mb-2">How to get the LinkedIn Partner ID</h6>
+          <p>Go to your <b>LinkedIn Campaign Manager</b> → <b>Account → Data Sources → Insight Tag</b>. 
+          Copy your Partner ID from there.</p>
+          <h6 class="fw-semibold mt-4 mb-2">Where to use it</h6>
+          <p>Go to <b>Marketing Tools → LinkedIn Insight Tag</b> section, enable it, and paste your Partner ID.</p>
+        `;
+        break;
+
+      case title.toLowerCase().includes("meta"):
+        iconSrc = "../../assets/backend/images/meta.png";
+        contentHTML = `
+          <h6 class="fw-semibold mb-2">How to get the Meta Pixel ID</h6>
+          <p>Login to your <b>Meta Business Manager</b> → Go to <b>Events Manager → Data Sources</b>. 
+          Select your pixel and copy its ID.</p>
+          <h6 class="fw-semibold mt-4 mb-2">Where to use it</h6>
+          <p>Go to <b>Marketing Tools → Meta Pixel</b> section, turn it ON, and paste your Pixel ID.</p>
+        `;
+        break;
+
+      case title.toLowerCase().includes("pinterest"):
+        iconSrc = "../../assets/backend/images/pinterest.png";
+        contentHTML = `
+          <h6 class="fw-semibold mb-2">How to get the Pinterest Tag ID</h6>
+          <p>Log in to your <b>Pinterest Ads Manager</b> → <b>Conversions → Tag Manager</b> and copy your Tag ID.</p>
+          <h6 class="fw-semibold mt-4 mb-2">Where to use it</h6>
+          <p>Go to <b>Marketing Tools → Pinterest Pixel</b> section, toggle ON, and paste your Tag ID.</p>
+        `;
+        break;
+
+      case title.toLowerCase().includes("snapchat"):
+        iconSrc = "../../assets/backend/images/snapchat.png";
+        contentHTML = `
+          <h6 class="fw-semibold mb-2">How to get the Snapchat Pixel ID</h6>
+          <p>Log in to your <b>Snapchat Ads Manager</b> → <b>Events Manager → Pixels</b>. 
+          Copy your Pixel ID from the list.</p>
+          <h6 class="fw-semibold mt-4 mb-2">Where to use it</h6>
+          <p>Go to <b>Marketing Tools → Snapchat Pixel</b> section, turn ON, and paste your Pixel ID.</p>
+        `;
+        break;
+
+      case title.toLowerCase().includes("tiktok"):
+        iconSrc = "../../assets/backend/images/tiktok.png";
+        contentHTML = `
+          <h6 class="fw-semibold mb-2">How to get the TikTok Pixel ID</h6>
+          <p>Go to your <b>TikTok Business Center</b> → <b>Events Manager → Data Sources</b>. 
+          Find your Pixel and copy its ID.</p>
+          <h6 class="fw-semibold mt-4 mb-2">Where to use it</h6>
+          <p>Go to <b>Marketing Tools → TikTok Pixel</b> section, enable it, and paste your Pixel ID.</p>
+        `;
+        break;
+
+      case title.toLowerCase().includes("twitter") || title.toLowerCase().includes("x"):
+        iconSrc = "../../assets/backend/images/x.png";
+        contentHTML = `
+          <h6 class="fw-semibold mb-2">How to get the X (Twitter) Pixel ID</h6>
+          <p>Login to your <b>Twitter Ads</b> account → Go to <b>Tools → Events Manager</b>. 
+          Create or select a pixel and copy the ID.</p>
+          <h6 class="fw-semibold mt-4 mb-2">Where to use it</h6>
+          <p>Go to <b>Marketing Tools → X (Twitter) Pixel</b> section, toggle ON, and paste your Pixel ID.</p>
+        `;
+        break;
+
+      default:
+        iconSrc = "../../assets/backend/images/info.png";
+        contentHTML = `<p class="text-muted">Information coming soon.</p>`;
+    }
+
+    howIcon.src = iconSrc;
+    howTitle.textContent = `How it works - ${title}`;
+    howContent.innerHTML = contentHTML;
+
+    howModal.show();
+  });
+});
+  </script>
+
+
+
+</body>
+
+</html>

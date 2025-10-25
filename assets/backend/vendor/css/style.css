@@ -1,0 +1,182 @@
+/* =======================================
+Dashboard Page Css Start 
+======================================= */
+.dashboard-container .welcome-section .admin-img{
+    height: 60px;
+}
+.dashboard-container .welcome-section .d-flex{
+    align-items: start !important;
+}
+.dashboard-container .welcome-section p{
+    width: 100%;
+}
+.dashboard-container .business-analytics .analytics-card{
+    flex: 1 1 220px;
+}
+.dashboard-container .legend-item.hidden {
+    color: var(--text-primary);
+    text-decoration: line-through;
+}
+.dashboard-container .legend-item.hidden .legend-dot {
+    background-color: var(--gray);
+}
+.dashboard-container .legend-item { display: flex; align-items: center; cursor: pointer; transition: color 0.2s; } 
+.dashboard-container .legend-dot { width: 10px; height: 10px; border-radius: var(--radius-lg2); margin-right: 0.5rem; }
+.dashboard-container .legend-dot.income { background-color: var(--primary); }
+.dashboard-container .legend-dot.commission { background-color: var(--count-bg1); }
+.top-customer-products-section .product-card {
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%; 
+}
+.top-customer-products-section .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-sm);
+}
+.top-customer-products-section .product-image-wrapper {
+    aspect-ratio: 4 / 3; 
+}
+.top-customer-products-section .product-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+.top-customer-products-section .product-info {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.top-customer-products-section .sold-badge {
+    background-color: var(--primary-light);
+    font-size: var(--fs-xss);
+    font-weight: var(--fw-semibold);
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius-6);
+}
+.top-customer-products-section .product-info{
+    text-align: left;
+}
+.top-navbar {
+    border-bottom: 1px solid var(--border-light);
+}
+.top-navbar .nav-item-group {
+    border: 1px solid var(--primary-light);
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    box-shadow: var(--shadow-sm);
+}
+/* Language Selector */
+.top-navbar .language-selector {
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+}
+.top-navbar .language-selector .divider {
+    border-left: 1px solid var(--border-color);
+    height: 20px;
+    margin: 0 1rem;
+}
+.top-navbar .language-selector .current-lang {
+    color: var(--primary);
+}
+/* Icon Group */
+.top-navbar .icon-group .icon-btn {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-lg2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--fs-lg);
+    color: var(--primary);
+    border: 1px solid var(--border-color);
+    margin-left: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+.top-navbar .icon-group .icon-btn:hover {
+    background-color: var(--primary-light);
+}  
+.top-navbar .notification-badge {
+    position: absolute;
+    top: -6px;
+    right: -4px;
+    background: var(--primary-dark) !important;
+    color: var(--white);
+    font-size: var(--fs-xss);
+    width: 16px;
+    height: 16px;
+    border-radius: var(--radius-lg2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.top-navbar .status-dot {
+    position: absolute; bottom: 2px; right: 2px;
+    width: 10px; height: 10px; background-color: var(--primary);
+    border-radius: var(--radius-lg2); border: 2px solid var(--white);
+}
+/* Profile Dropdown Custom Styling */
+.top-navbar .profile-dropdown-toggle {
+    cursor: pointer;
+}
+.top-navbar .profile-dropdown-toggle .profile-icon {
+    width: 40px; 
+    height: 40px; 
+    border-radius: var(--radius-lg2);
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    position: relative;
+}
+.top-navbar .profile-dropdown-toggle .dropdown-text{
+    font-size: var(--fs-sm);
+}
+.top-navbar .profile-dropdown-menu {
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    padding: 0.5rem 0;
+    min-width: 270px;
+    margin-top: 0.75rem !important;
+    transform: translate3d(2px, 49.6px, 0px) !important;
+}
+.top-navbar .dropdown-user-info {
+    padding: 0.75rem 1.25rem;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 0.5rem;
+}
+.top-navbar .dropdown-user-info img,
+.top-navbar .profile-dropdown-toggle .profile-icon img {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-lg);
+}
+.top-navbar .dropdown-user-info .user-name {
+    font-weight: var(--fw-medium);
+    color: var(--text-dark);
+}
+.top-navbar .dropdown-user-info .user-email {
+    font-size: var(--fs-xs);
+    color: var(--text-muted);
+}
+.top-navbar .profile-dropdown-menu .dropdown-item {
+    font-size: var(--fs-sm);
+    padding: 0.6rem 1.25rem;
+    color: var(--text-dark);
+}
+.top-navbar .profile-dropdown-menu .dropdown-item i {
+    width: 20px;
+    margin-right: 0.75rem;
+    color: var(--text-muted);
+}
+.top-navbar .profile-dropdown-menu .dropdown-item:active {
+    background-color: var(--primary);
+    color: var(--white)
+}
+/* =======================================
+Dashboard Page Css End 
+======================================= */

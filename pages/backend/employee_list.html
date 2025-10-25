@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Multi-vendor E-commerce Platform">
+  <title>Employee List</title>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../../assets/images/favicon.png" type="image/x-icon">
+
+  <!-- CSS Libraries -->
+  <link rel="stylesheet" href="../../assets/backend/css/vendor/all.min.css">
+  <link rel="stylesheet" href="../../assets/backend/css/vendor/bootstrap.min.css">
+  <link rel="stylesheet" href="../../assets/backend/css/vendor/swiper-bundle.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../../assets/backend/css/style.css">
+  <link rel="stylesheet" href="../../assets/backend/css/global.css">
+  <link rel="stylesheet" href="../../assets/backend/css/responsive.css">
+</head>
+
+<body>
+  <!-- Dashboard Area Start -->
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-container">
+          <div class="logo-icon">
+            <i class="fa fa-shopping-cart"></i>
+          </div>
+          <span class="logo-text">Dotvalley</span>
+        </div>
+        <button class="sidebar-toggle"><i class="fa fa-bars"></i></button>
+      </div>
+      <div class="sidebar-search">
+        <div class="search-container">
+          <i class="fa fa-search search-icon"></i>
+          <input type="text" placeholder="Search menu">
+        </div>
+      </div>
+      <nav class="sidebar-menu">
+        <ul>
+          <li class="menu-item active">
+            <a href="dashboard.html">
+              <i class="fa fa-home"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="blank.html">
+              <i class="fa-solid fa-cart-shopping"></i>
+              <span>POS</span>
+            </a>
+          </li>
+
+          <li class="menu-section">Order Management</li>
+
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa fa-gift"></i>
+              <span>Orders</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item active">
+                <a href="all_order.html">
+                  <span>All</span>
+                  <span class="count">195</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="#orders-pending">
+                  <span>Pending</span>
+                  <span class="count">59</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="#orders-confirmed">
+                  <span>Confirmed</span>
+                  <span class="count">21</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="#orders-packaging">
+                  <span>Packaging</span>
+                  <span class="count">9</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="#orders-delivery">
+                  <span>Out for delivery</span>
+                  <span class="count">7</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="#orders-delivered">
+                  <span>Delivered</span>
+                  <span class="count delivered">80</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="#orders-returned">
+                  <span>Returned</span>
+                  <span class="count returned">4</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="#orders-failed">
+                  <span>Failed to Deliver</span>
+                  <span class="count failed">6</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="#orders-canceled">
+                  <span>Canceled</span>
+                  <span class="count canceled">6</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa-solid fa-money-bill-transfer"></i>
+              <span>Refund Requests</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="refund_request_pending.html">
+                  <span>Pending</span>
+                  <span class="count returned">12</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="refund_request_approved.html">
+                  <span>Approved</span>
+                  <span class="count delivered">5</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="refund_request_refunded.html">
+                  <span>Refunded</span>
+                  <span class="count returned">4</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="refund_request_rejected.html">
+                  <span>Rejected</span>
+                  <span class="count returned">3</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="menu-section">Product Management</li>
+
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa fa-th-large"></i>
+              <span>Category Setup</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="add_category.html">
+                  <span>Categories</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="add_subcategory.html">
+                  <span>Sub Categories</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa fa-tags"></i>
+              <span>Brands</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="brand_add.html">
+                  <span>Add New</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="brand_list.html">
+                  <span>List</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="menu-item">
+            <a href="attribute_setup.html">
+              <i class="fa-solid fa-sliders"></i>
+              <span>Product Attribute Setup</span>
+            </a>
+          </li>
+
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa fa-store"></i>
+              <span>In House Products</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="inhouse_product_list.html">
+                  <span>Product List</span>
+                  <span class="count delivered">8</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="inhouse_add_new_product.html">
+                  <span>Add New Product</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="inhouse_bulk_import.html">
+                  <span>Bulk Import</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="inhouse_request_restock_list.html">
+                  <span>Request Restock List</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa fa-user-tag"></i>
+              <span>Vendor Products</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="vendor_new_product_list.html">
+                  <span>New Products List</span>
+                  <span class="count returned">8</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="vendor_update_product_request.html">
+                  <span>Product Update Request</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="vendor_approve_product.html">
+                  <span>Approved Products</span>
+                  <span class="count delivered">8</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="menu-item">
+            <a href="product_gallery.html">
+              <i class="fa-solid fa-images"></i>
+              <span>Product Gallery</span>
+            </a>
+          </li>
+          <li class="menu-section">Promotion Management</li>
+          <li class="menu-item">
+            <a href="banner_setup.html">
+              <i class="fa-solid fa-play"></i>
+              <span>Banner Setup</span>
+            </a>
+          </li>
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa-regular fa-folder-open"></i>
+              <span>Offers & Deals</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="coupon.html">
+                  <span>Coupon</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="flash_deal.html">
+                  <span>Flash Deals</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="deal_of_the_day.html">
+                  <span>Deal of The Day</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa-solid fa-bell"></i>
+              <span>Notification</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="notification_send.html">
+                  <span>Send Notification</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="vendor_update_product_request.html">
+                  <span>Push Notification Setup</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="menu-item">
+            <a href="announcement.html">
+              <i class="fa-solid fa-bullhorn"></i>
+              <span>Announcement</span>
+            </a>
+          </li>
+          <li class="menu-section">User Management</li>
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa-solid fa-users"></i>
+              <span>Customers</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="customer_list.html">
+                  <span>Customer List</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="customer_review.html">
+                  <span>Customer Reviews</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="customer_wallet.html">
+                  <span>Wallet</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="customer_wallet_bonus_setup.html">
+                  <span>Wallet Bonus Setup</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="customer_loyality_point_report.html">
+                  <span>Loyality Points</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa-solid fa-user"></i>
+              <span>Vendors</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="vendor_add_new.html">
+                  <span>Add New Vendor</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="vendor_list.html">
+                  <span>Vendor List</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="vendor_withdraw.html">
+                  <span>Withdraws</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="vendor_withdraw_method_list.html">
+                  <span>Withdrawal Methods</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa-solid fa-truck-fast"></i>
+              <span>Delivery Man</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="delivery_add_new_man.html">
+                  <span>Add New</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="delivery_man_list.html">
+                  <span>List</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="delivery_man_withdraws.html">
+                  <span>Withdraws</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="delivery_man_emergency_contact.html">
+                  <span>Emergency Contact</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa-solid fa-user-group"></i>
+              <span>Employees</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="employee_role_setup.html">
+                  <span>Employees Role Setup</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="">
+                  <span>Employees</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="">
+                  <span>Add New</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="menu-section">Business Settings</li>
+          <li class="menu-item">
+            <a href="">
+              <i class="fa fa-solid fa-gear"></i>
+              <span>Business Setup</span>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="">
+              <i class="fa fa-solid fa-shop"></i>
+              <span>Inhouse Shop</span>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="">
+              <i class="fa fa-solid fa-magnifying-glass"></i>
+              <span>SEO Settings</span>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="">
+              <i class="fa fa-solid fa-screwdriver-wrench"></i>
+              <span>Priority Setup</span>
+            </a>
+          </li>
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa-solid fa-photo-film"></i>
+              <span>Pages & Media</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="employee_role_setup.html">
+                  <span>System Setup</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="">
+                  <span>Login Settings</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="">
+                  <span>Email Template</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="">
+                  <span>Gallery</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="menu-item has-submenu bg-secondary-light">
+            <div class="menu-link">
+              <i class="fa-solid fa-sliders"></i>
+              <span>System Settings</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="ss_system_setup.html">
+                  <span>System Setup</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="ss_login_settings.html">
+                  <span>Login Settings</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="ss_email_template.html">
+                  <span>Email Template</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="">
+                  <span>Gallery</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="menu-item has-submenu bg-primary-light">
+            <div class="menu-link">
+              <i class="fa-solid fa-users-gear"></i>
+              <span>3rd Party Setup</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="3rd_digital_payment_setup.html">
+                  <span>Payment methods</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="3rd_firebase_configuration.html">
+                  <span>Firebase</span>
+                </a>
+              </li>
+              <li class="submenu-item ">
+                <a href="3rd_marketing_tools.html">
+                  <span>Marketing Tools</span>
+                </a>
+              </li>
+              
+            </ul>
+          </li>
+          <li class="menu-item logout-active my-3">
+            <div class="menu-link">
+              <i class="fa fa-right-from-bracket"></i>
+              <span>Logout</span>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+    <!-- Main Section Start -->
+    <main class="main-content">
+      <!-- Dashboard Header Section Start -->
+      <header class="dashboard-header">
+        <div class="header-search-section">
+          <div class="search-container">
+            <input type="text" class="search-product" placeholder="Search product">
+            <button class="search-btn">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button class="action-btn" title="Language">
+            <i class="fa fa-globe"></i>
+          </button>
+          <button class="action-btn" title="Country">
+            <img src="../../assets/backend/images/flags/us.png" alt="EN" class="flag-icon">
+          </button>
+          <button class="action-btn" title="Messages">
+            <i class="fa fa-comments"></i>
+            <span class="notification-badge">3</span>
+          </button>
+          <button class="action-btn" title="Orders">
+            <i class="fa fa-shopping-bag"></i>
+            <span class="notification-badge">1</span>
+          </button>
+          <div class="user-dropdown">
+            <button class="action-btn user-btn" title="User Profile">
+              <i class="fa fa-user"></i>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-header">
+                <img src="../../assets/backend/images/admin.png" alt="Admin" class="user-avatar">
+                <div class="user-info">
+                  <h6>Admin User</h6>
+                  <span>admin@dotvalley.com</span>
+                </div>
+              </div>
+              <div class="dropdown-divider"></div>
+              <a href="https://facebook.com" class="dropdown-item">
+                <i class="fa fa-user-circle"></i>
+                <span>Update Profile</span>
+              </a>
+              <a href="https://youtube.com" class="dropdown-item">
+                <i class="fa fa-cog"></i>
+                <span>Settings</span>
+              </a>
+              <a href="#help" class="dropdown-item">
+                <i class="fa fa-question-circle"></i>
+                <span>Help & Support</span>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#logout" class="dropdown-item logout-item">
+                <i class="fa fa-sign-out-alt"></i>
+                <span>Logout</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </header>
+      <!-- employelist  Section Start -->
+           <section class="employe all-orders">
+            <div class="container">
+                <!-- Header -->
+                <header class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="header-title">
+                        <img src="../../assets/backend/images/employee.png" alt="Employee">
+                        <h1>Employee list</h1>
+                    </div>
+                    <a href="/pages/backend/add_new_employee.html" class="btn btn-primary fs-sm" data-translate-key="see_all_button"><i class="fa fa-plus"></i>Add New</a>
+                </header>
+                <!-- Employee List Card -->
+                <div class="card-custom all-orders">
+                    <div class="row align-items-center mb-4">
+                        <div class="col-md-6 mb-3 mb-md-0">
+                            <div class="input-group search-input-group">
+                                <input type="text" class="form-control" id="searchInput" placeholder="Search by name, email, phone or role">
+                                <button class="btn" type="button"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                        <div class="col-md-6 d-flex justify-content-md-end">
+                            <button class="btn btn-export me-3">
+                                <img src="../../assets/backend/images/export.png" alt="Export Icon"> Export
+                            </button>
+                           
+                        </div>
+                    </div>
+                </div>
+                <div class="card-custom">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="mb-0 fw-semibold">Employee table <sup id="totalCount" class="text-primary">2</sup></h5>
+                    <select id="filterSelect" class="form-select w-auto">
+                        <option value="all">All</option>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                    </div>
+
+                    <div class="table-responsive">
+                    <table class="table align-middle" id="employeeTable">
+                        <thead>
+                        <tr>
+                            <th>SL</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Employee</td>
+                            <td>employee123@gmail.com</td>
+                            <td>01111111111</td>
+                            <td>Product Manager</td>
+                            <td><div class="form-check form-switch"><input class="form-check-input status-toggle" type="checkbox" checked
+                                data-title-on="Activate Employee?"
+                                data-subtitle-on="This employee will become active and can access the system."
+                                data-title-off="Deactivate Employee?"
+                                data-subtitle-off="This employee will no longer have access to the system."
+                                data-icon="../../assets/backend/images/employee.png"></div></td>
+                            <td>
+                            <button class="btn btn-action download-action-btn me-2 bg-white"><i class="fas fa-pen-to-square"></i></button>
+                            <button class="btn btn-action btn-delete"><i class="fas fa-trash-can"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Demo Employee</td>
+                            <td>employee@gmail.com</td>
+                            <td>01666666666</td>
+                            <td>Product Manager</td>
+                            <td><div class="form-check form-switch"><input class="form-check-input status-toggle" type="checkbox" checked
+                                data-title-on="Activate Employee?"
+                                data-subtitle-on="This employee will become active and can access the system."
+                                data-title-off="Deactivate Employee?"
+                                data-subtitle-off="This employee will no longer have access to the system."
+                                data-icon="../../assets/backend/images/employee.png"></div></td>
+                            <td>
+                            <button class="btn btn-action download-action-btn me-2 bg-white"><i class="fas fa-pen-to-square"></i></button>
+                            <button class="btn btn-action btn-delete"><i class="fas fa-trash-can"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>John Doe</td>
+                            <td>john.doe@company.com</td>
+                            <td>01812345678</td>
+                            <td>UI Designer</td>
+                            <td><div class="form-check form-switch"><input class="form-check-input status-toggle" type="checkbox" checked
+                                data-title-on="Activate Employee?"
+                                data-subtitle-on="This employee will become active and can access the system."
+                                data-title-off="Deactivate Employee?"
+                                data-subtitle-off="This employee will no longer have access to the system."
+                                data-icon="../../assets/backend/images/employee.png"></div></td>
+                            
+                            <td>
+                            <button class="btn btn-action download-action-btn me-2 bg-white"><i class="fas fa-pen-to-square"></i></button>
+                            <button class="btn btn-action btn-delete"><i class="fas fa-trash-can"></i></button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            </div>
+           </section>
+
+
+  </main>
+
+
+
+  <!-- Main Section End -->
+  </div>
+  <!-- Dashboard Area End -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="statusConfirmModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-center p-4">
+        <div class="mb-3">
+            <img id="modalIcon" src="" alt="icon" width="80">
+        </div>
+        <h5 id="modalTitle" class="fw-bold mb-2 text-success"></h5>
+        <p id="modalSubtitle" class="text-muted small mb-4"></p>
+        <div class="d-flex justify-content-center gap-3">
+            <button type="button" class="btn btn-light px-4" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-success px-4" id="modalConfirmBtn">OK</button>
+        </div>
+        </div>
+    </div>
+    </div>
+
+
+  <!-- JS Libraries -->
+    <script src="../../assets/backend/js/vendor/jquery-3.7.1.min.js"></script>
+    <script src="../../assets/backend/js/app.js"></script> 
+    <script src="../../assets/backend/js/vendor/all.min.js"></script>
+    <script src="../../assets/backend/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/backend/js/vendor/swiper-bundle.min.js"></script>
+    <script src="../../assets/backend/js/vendor/chart-4.5.0.js"></script>
+    <script src="../../assets/backend/js/vendor/popper.min.js"></script>
+
+
+
+
+<script>
+  // 🔍 Search function
+  document.getElementById("searchInput").addEventListener("keyup", function() {
+    const filter = this.value.toLowerCase();
+    const rows = document.querySelectorAll("#employeeTable tbody tr");
+    let count = 0;
+    rows.forEach(row => {
+      const text = row.innerText.toLowerCase();
+      const match = text.includes(filter);
+      row.style.display = match ? "" : "none";
+      if (match) count++;
+    });
+    document.getElementById("totalCount").textContent = count;
+  });
+
+  // 🔄 Filter Active/Inactive
+  document.getElementById("filterSelect").addEventListener("change", function() {
+    const filter = this.value;
+    const rows = document.querySelectorAll("#employeeTable tbody tr");
+    let count = 0;
+    rows.forEach(row => {
+      const toggle = row.querySelector(".form-check-input");
+      const active = toggle.checked;
+      let show = true;
+      if (filter === "active") show = active;
+      else if (filter === "inactive") show = !active;
+      row.style.display = show ? "" : "none";
+      if (show) count++;
+    });
+    document.getElementById("totalCount").textContent = count;
+  });
+
+  // 🟢 Modal confirmation for toggle
+  const modalEl = document.getElementById('statusConfirmModal');
+  const bsModal = new bootstrap.Modal(modalEl);
+  const modalTitle = document.getElementById('modalTitle');
+  const modalSubtitle = document.getElementById('modalSubtitle');
+  const modalIcon = document.getElementById('modalIcon');
+  const modalConfirmBtn = document.getElementById('modalConfirmBtn');
+
+  let currentToggle = null;
+  let intendedState = false;
+
+  document.querySelectorAll('.status-toggle').forEach(toggle => {
+    toggle.addEventListener('change', e => {
+      e.preventDefault();
+      currentToggle = toggle;
+      intendedState = toggle.checked;
+      toggle.checked = !intendedState; // revert until confirmed
+      modalTitle.textContent = intendedState ? toggle.dataset.titleOn : toggle.dataset.titleOff;
+      modalSubtitle.textContent = intendedState ? toggle.dataset.subtitleOn : toggle.dataset.subtitleOff;
+      modalIcon.src = toggle.dataset.icon;
+      bsModal.show();
+    });
+  });
+
+  modalConfirmBtn.addEventListener('click', () => {
+    if (currentToggle) currentToggle.checked = intendedState;
+    bsModal.hide();
+  });
+</script>
+
+
+
+</body>
+
+</html>

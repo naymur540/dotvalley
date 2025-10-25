@@ -1,0 +1,199 @@
+@media (max-width: 992px){
+  .refund-request .tablediv{
+    display: block !important;
+  }
+  .pg-card-head{
+    display: block !important;
+  }
+}
+@media (max-width: 991.98px){
+  .add_category .upload-panel{ gap: var(--spacing-15); }
+  .add_category .action-btn{
+    margin: 5px 0;
+  }
+  .login_settings .tile-group{ grid-template-columns:1fr !important; }
+}
+@media (max-width: 768px) {
+  .dashboard-container .sidebar {
+    position: fixed;
+    left: -280px;
+    top: 0;
+    height: 100vh;
+    z-index: 1000;
+    transition: left 0.3s ease;
+  }
+  .dashboard-container .main-content .dashboard-header{
+    border:none;
+    box-shadow: none;
+  }
+  .dashboard-container .sidebar.open {
+    left: 0;
+  }
+  
+  .dashboard-container .main-content {
+    margin-left: 0;
+    width: 100%;
+  }
+  
+  .dashboard-container .sidebar-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1001;
+  }
+  .dashboard-container .dashboard-header {
+    flex-direction: column;
+    gap: var(--spacing-15);
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  .dashboard-container .header-search-section {
+    width: 100%;
+    max-width: none;
+  }
+
+  .dashboard-container .header-actions {
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--spacing-10);
+  }
+
+  .dashboard-container .action-btn {
+    width: 35px;
+    height: 35px;
+    font-size: var(--fs-xs);
+  }
+
+  .dashboard-container .user-dropdown {
+    position: relative;
+  }
+
+  .dashboard-container .dropdown-menu {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    min-width: 200px;
+    z-index: 1000;
+  }
+
+  .top-customer-products-section .top-customers-grid,
+  .top-customer-products-section .popular-products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-15);
+  }
+  
+  .top-customer-products-section .customer-avatar {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .top-customer-products-section .product-image {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .store-information-section .info-card {
+    padding: 15px;
+  }
+  
+  .store-information-section .info-card-header h4 {
+    font-size: var(--fs-sm);
+  }
+}
+
+@media (max-width: 576px) {
+  .dashboard-container .dashboard-header {
+    padding: 12px;
+  }
+
+  .dashboard-container .header-actions {
+    justify-content: center;
+    gap: var(--spacing-2);
+  }
+
+  .dashboard-container .action-btn {
+    width: 32px;
+    height: 32px;
+    font-size: var(--fs-11);
+  }
+
+  .dashboard-container .notification-badge {
+    width: 16px;
+    height: 16px;
+    font-size: var(--fs-xss);
+    min-width: 16px;
+  }
+
+  .dashboard-container .search-container {
+    border-radius: var(--radius-10);
+  }
+
+  .dashboard-container .search-product {
+    padding: 10px 12px;
+    font-size: var(--fs-sm);
+  }
+
+  .dashboard-container .search-btn {
+    padding: 12px 14px;
+  }
+
+  .top-customer-products-section .top-customers-grid,
+  .top-customer-products-section .popular-products-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-10);
+  }
+  .inhouse-request-restock header{
+    display: block !important;
+  }
+  .inhouse-request-restock .btn-filters{
+    margin: 10px 0 !important;
+  }
+}
+
+@media (max-width: 575.98px){
+  .add_category .upload-panel{ flex-direction:column; }
+  .add_category .upload-box{
+    width: 100%;
+  }
+  .add_category .search-input-group .btn-export{
+    display: block !important;
+  }
+  .add_category .category-list{
+    display: block !important;
+    margin: 10px 0 !important;
+  }
+  .add_category .category-list .btn-export{
+    margin: 10px 0 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-container .dashboard-header {
+    padding: 10px;
+  }
+
+  .dashboard-container .header-actions {
+    gap: var(--spacing-1);
+  }
+
+  .dashboard-container .action-btn {
+    width: 30px;
+    height: 30px;
+    font-size: var(--fs-xss);
+  }
+
+  .dashboard-container .flag-icon {
+    width: 16px;
+    height: 12px;
+  }
+}
+@media (max-width: 440px) {
+  .all-orders .header-title h1{
+    font-size: var(--fs-sm);
+  }
+  .all-orders .btn{
+    padding: 5px 10px;
+  }
+}

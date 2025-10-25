@@ -1,0 +1,2369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Multi-vendor E-commerce Platform">
+  <title>3rd Party Other Configaration</title>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../../assets/images/favicon.png" type="image/x-icon">
+
+  <!-- CSS Libraries -->
+  <link rel="stylesheet" href="../../assets/backend/css/vendor/all.min.css">
+  <link rel="stylesheet" href="../../assets/backend/css/vendor/bootstrap.min.css">
+  <link rel="stylesheet" href="../../assets/backend/css/vendor/swiper-bundle.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../../assets/backend/css/style.css">
+  <link rel="stylesheet" href="../../assets/backend/css/global.css">
+  <link rel="stylesheet" href="../../assets/backend/css/responsive.css">
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <!-- Leaflet Geocoder (Search Box) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+  <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+  <style>
+    .filter-item {
+        background: #f5f5f5;
+        border-radius: 8px;
+        padding: 12px 20px;
+        text-align: center;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all .3s;
+        box-shadow: 0 2px 6px rgba(0,0,0,.1);
+        white-space: nowrap; 
+        flex-shrink: 0; 
+    }
+    .filter-item:hover {
+        background: #e0e0e0;
+    }
+    .filter-item.active {
+        background: #fff;
+        
+    }
+
+    .pn-filter-bar::-webkit-scrollbar {
+      height: 6px;
+    }
+    .pn-filter-bar::-webkit-scrollbar-thumb {
+      background-color: rgba(0,0,0,0.2);
+      border-radius: 10px;
+    }
+    .content-box {
+    transition: all 0.3s ease;
+    }
+    .content-extra {
+        border-top: 1px solid #f0f0f0;
+        padding-top: 15px;
+    }
+    .copy-btn {
+        border-color: #28a745;
+        color: #28a745;
+    }
+    .copy-btn:hover {
+        background: #28a745;
+        color: white;
+    }
+
+    @media (max-width: 768px) {
+        .content-extra .row {
+        flex-direction: column;
+        }
+        .d-flex.justify-content-end {
+        flex-direction: column;
+        gap: 10px;
+        }
+    }
+    .modal-content {
+      height: 100%;
+      border-radius: 0;
+      border: none;
+      box-shadow: none;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background-color: #fff;
+    }
+    
+
+  </style>
+</head>
+
+<body>
+  <!-- Dashboard Area Start -->
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-container">
+          <div class="logo-icon">
+            <i class="fa fa-shopping-cart"></i>
+          </div>
+          <span class="logo-text">Dotvalley</span>
+        </div>
+        <button class="sidebar-toggle"><i class="fa fa-bars"></i></button>
+      </div>
+      <div class="sidebar-search">
+        <div class="search-container">
+          <i class="fa fa-search search-icon"></i>
+          <input type="text" placeholder="Search menu">
+        </div>
+      </div>
+      <nav class="sidebar-menu">
+        <ul>
+          <li class="menu-item ">
+            <a href="dashboard.html">
+              <i class="fa fa-home"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="blank.html">
+              <i class="fa-solid fa-cart-shopping"></i>
+              <span>POS</span>
+            </a>
+          </li>
+
+          <li class="menu-section">Order Management</li>
+
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa fa-gift"></i>
+              <span>Orders</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item ">
+                <a href="all_order.html">
+                  <span>All</span>
+                  <span class="count">195</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="#orders-pending">
+                  <span>Pending</span>
+                  <span class="count">59</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="#orders-confirmed">
+                  <span>Confirmed</span>
+                  <span class="count">21</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="#orders-packaging">
+                  <span>Packaging</span>
+                  <span class="count">9</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="#orders-delivery">
+                  <span>Out for delivery</span>
+                  <span class="count">7</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="#orders-delivered">
+                  <span>Delivered</span>
+                  <span class="count delivered">80</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="#orders-returned">
+                  <span>Returned</span>
+                  <span class="count returned">4</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="#orders-failed">
+                  <span>Failed to Deliver</span>
+                  <span class="count failed">6</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="#orders-canceled">
+                  <span>Canceled</span>
+                  <span class="count canceled">6</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa-solid fa-money-bill-transfer"></i>
+              <span>Refund Requests</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="refund_request_pending.html">
+                  <span>Pending</span>
+                  <span class="count returned">12</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="refund_request_approved.html">
+                  <span>Approved</span>
+                  <span class="count delivered">5</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="refund_request_refunded.html">
+                  <span>Refunded</span>
+                  <span class="count returned">4</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="refund_request_rejected.html">
+                  <span>Rejected</span>
+                  <span class="count returned">3</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="menu-section">Product Management</li>
+
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa fa-th-large"></i>
+              <span>Category Setup</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="add_category.html">
+                  <span>Categories</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="add_subcategory.html">
+                  <span>Sub Categories</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa fa-tags"></i>
+              <span>Brands</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="brand_add.html">
+                  <span>Add New</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="brand_list.html">
+                  <span>List</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="menu-item">
+            <a href="attribute_setup.html">
+              <i class="fa-solid fa-sliders"></i>
+              <span>Product Attribute Setup</span>
+            </a>
+          </li>
+
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa fa-store"></i>
+              <span>In House Products</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="inhouse_product_list.html">
+                  <span>Product List</span>
+                  <span class="count delivered">8</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="inhouse_add_new_product.html">
+                  <span>Add New Product</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="inhouse_bulk_import.html">
+                  <span>Bulk Import</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="inhouse_request_restock_list.html">
+                  <span>Request Restock List</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa fa-user-tag"></i>
+              <span>Vendor Products</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="vendor_new_product_list.html">
+                  <span>New Products List</span>
+                  <span class="count returned">8</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="vendor_update_product_request.html">
+                  <span>Product Update Request</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="vendor_approve_product.html">
+                  <span>Approved Products</span>
+                  <span class="count delivered">8</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="menu-item">
+            <a href="product_gallery.html">
+              <i class="fa-solid fa-images"></i>
+              <span>Product Gallery</span>
+            </a>
+          </li>
+          <li class="menu-section">Promotion Management</li>
+          <li class="menu-item">
+            <a href="banner_setup.html">
+              <i class="fa-solid fa-play"></i>
+              <span>Banner Setup</span>
+            </a>
+          </li>
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa-regular fa-folder-open"></i>
+              <span>Offers & Deals</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="coupon.html">
+                  <span>Coupon</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="flash_deal.html">
+                  <span>Flash Deals</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="deal_of_the_day.html">
+                  <span>Deal of The Day</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa-solid fa-bell"></i>
+              <span>Notification</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="notification_send.html">
+                  <span>Send Notification</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="vendor_update_product_request.html">
+                  <span>Push Notification Setup</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="menu-item">
+            <a href="announcement.html">
+              <i class="fa-solid fa-bullhorn"></i>
+              <span>Announcement</span>
+            </a>
+          </li>
+          <li class="menu-section">User Management</li>
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa-solid fa-users"></i>
+              <span>Customers</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="customer_list.html">
+                  <span>Customer List</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="customer_review.html">
+                  <span>Customer Reviews</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="customer_wallet.html">
+                  <span>Wallet</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="customer_wallet_bonus_setup.html">
+                  <span>Wallet Bonus Setup</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="customer_loyality_point_report.html">
+                  <span>Loyality Points</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa-solid fa-user"></i>
+              <span>Vendors</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="vendor_add_new.html">
+                  <span>Add New Vendor</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="vendor_list.html">
+                  <span>Vendor List</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="vendor_withdraw.html">
+                  <span>Withdraws</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="vendor_withdraw_method_list.html">
+                  <span>Withdrawal Methods</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa-solid fa-truck-fast"></i>
+              <span>Delivery Man</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="delivery_add_new_man.html">
+                  <span>Add New</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="delivery_man_list.html">
+                  <span>List</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="delivery_man_withdraws.html">
+                  <span>Withdraws</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="delivery_man_emergency_contact.html">
+                  <span>Emergency Contact</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa-solid fa-user-group"></i>
+              <span>Employees</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="employee_role_setup.html">
+                  <span>Employees Role Setup</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="">
+                  <span>Employees</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="">
+                  <span>Add New</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="menu-section">Business Settings</li>
+          <li class="menu-item">
+            <a href="">
+              <i class="fa fa-solid fa-gear"></i>
+              <span>Business Setup</span>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="">
+              <i class="fa fa-solid fa-shop"></i>
+              <span>Inhouse Shop</span>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="">
+              <i class="fa fa-solid fa-magnifying-glass"></i>
+              <span>SEO Settings</span>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="">
+              <i class="fa fa-solid fa-screwdriver-wrench"></i>
+              <span>Priority Setup</span>
+            </a>
+          </li>
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa-solid fa-photo-film"></i>
+              <span>Pages & Media</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="employee_role_setup.html">
+                  <span>System Setup</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="">
+                  <span>Login Settings</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="">
+                  <span>Email Template</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="">
+                  <span>Gallery</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="menu-item has-submenu bg-secondary-light">
+            <div class="menu-link">
+              <i class="fa-solid fa-sliders"></i>
+              <span>System Settings</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="ss_system_setup.html">
+                  <span>System Setup</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="ss_login_settings.html">
+                  <span>Login Settings</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="ss_email_template.html">
+                  <span>Email Template</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="">
+                  <span>Gallery</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="menu-item has-submenu bg-primary-light">
+            <div class="menu-link">
+              <i class="fa fa-solid fa-users-gear"></i>
+              <span>3rd Party Setup</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="3rd_party_payment_methode_setup.html">
+                  <span>Payment methods</span>
+                </a>
+              </li>
+              <li class="submenu-item ">
+                <a href="3rd_party_firebase.html">
+                  <span>Firebase</span>
+                </a>
+              </li>
+              <li class="submenu-item  ">
+                <a href="3rd_party_marketing_tools.html">
+                  <span>Marketing Tools</span>
+                </a>
+              </li>
+              <li class="submenu-item active ">
+                <a href="3rd_party_otherconfigaration.html">
+                  <span>Other Configuration</span>
+                </a>
+              </li>
+              
+            </ul>
+          </li>
+          
+          <li class="menu-item logout-active my-3">
+            <div class="menu-link">
+              <i class="fa fa-right-from-bracket"></i>
+              <span>Logout</span>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+    <!-- Main Section Start -->
+    <main class="main-content">
+      <!-- Dashboard Header Section Start -->
+      <header class="dashboard-header">
+        <div class="header-search-section">
+          <div class="search-container">
+            <input type="text" class="search-product" placeholder="Search product">
+            <button class="search-btn">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button class="action-btn" title="Language">
+            <i class="fa fa-globe"></i>
+          </button>
+          <button class="action-btn" title="Country">
+            <img src="../../assets/backend/images/flags/us.png" alt="EN" class="flag-icon">
+          </button>
+          <button class="action-btn" title="Messages">
+            <i class="fa fa-comments"></i>
+            <span class="notification-badge">3</span>
+          </button>
+          <button class="action-btn" title="Orders">
+            <i class="fa fa-shopping-bag"></i>
+            <span class="notification-badge">1</span>
+          </button>
+          <div class="user-dropdown">
+            <button class="action-btn user-btn" title="User Profile">
+              <i class="fa fa-user"></i>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-header">
+                <img src="../../assets/backend/images/admin.png" alt="Admin" class="user-avatar">
+                <div class="user-info">
+                  <h6>Admin User</h6>
+                  <span>admin@dotvalley.com</span>
+                </div>
+              </div>
+              <div class="dropdown-divider"></div>
+              <a href="https://facebook.com" class="dropdown-item">
+                <i class="fa fa-user-circle"></i>
+                <span>Update Profile</span>
+              </a>
+              <a href="https://youtube.com" class="dropdown-item">
+                <i class="fa fa-cog"></i>
+                <span>Settings</span>
+              </a>
+              <a href="#help" class="dropdown-item">
+                <i class="fa fa-question-circle"></i>
+                <span>Help & Support</span>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#logout" class="dropdown-item logout-item">
+                <i class="fa fa-sign-out-alt"></i>
+                <span>Logout</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </header>
+      <!-- Dashboard Header Section End -->
+      <section id="paymentMethods" class="pg-wrap container my-4 buiness-setup-section">
+            <!-- Header -->
+            <div class="all-orders">
+            <header class="d-flex justify-content-between align-items-center mb-4">
+                <div class="header-title">
+                <img src="../../assets/backend/images/gear.png" alt="Gallery">
+                <h1>3rd Party - Other Configurations</h1>
+                </div>
+            </header>
+            </div>
+
+             <div class="pn-filter-bar d-flex flex-nowrap overflow-auto gap-3 py-3">
+
+              <a href="#" id="socialMediaTab" class="text-decoration-none">
+                <div class="filter-item active">Social Media</div>
+              </a>
+
+              <a href="#" id="mailConfigurTab" class="text-decoration-none">
+                <div class="filter-item">Mail Configuration</div>
+              </a>
+
+              <a href="#" id="smsConfigurTab" class="text-decoration-none">
+                <div class="filter-item">SMS Configuration</div>
+              </a>
+
+              <a href="#" id="recaptchaTab" class="text-decoration-none">
+                <div class="filter-item">Recaptcha</div>
+              </a>
+
+              <a href="#" id="googleMapTab" class="text-decoration-none">
+                <div class="filter-item">Google Map APIs</div>
+              </a>
+
+              <a href="#" id="storageConnectionTab" class="text-decoration-none">
+                <div class="filter-item">Storage Connection</div>
+              </a>
+
+            </div>
+            <!-- ================================
+              sosial media Configuration Section
+             =================================== -->
+            <div class="mt-2" id="socialMediaContent">
+                <form action="">
+                    <section class="card-custom p-4 mb-4">
+                        <h5 class="fw-semibold mb-1">Social Media Chat</h5>
+                        <p class="text-muted small mb-4">
+                        Enable chat channels so customers can easily reach you via messaging apps.
+                        </p>
+
+                        <div class="content-box border rounded p-3 bg-white" style="border-color: #e9ecef !important;">
+                        <div class="d-flex flex-wrap justify-content-between align-items-center">
+                            <div class="mb-2 mb-md-0">
+                            <h6 class="fw-semibold mb-0">WhatsApp</h6>
+                            <small class="text-muted">Enter your business WhatsApp number.</small>
+                            </div>
+
+                            <div class="d-flex align-items-center gap-3">
+                            <span class="view-toggle text-success fw-semibold" data-expanded="false">
+                                View <i class="fa-solid fa-arrow-down"></i>
+                            </span>
+                            <div class="form-check form-switch m-0">
+                                <input
+                                    class="form-check-input confirm-toggle"
+                                    type="checkbox"
+                                    data-title-on="Want to turn ON WhatsApp as social media chat option?"
+                                    data-subtitle-on="If enabled, WhatsApp chatting option will be visible to customers."
+                                    data-title-off="Want to turn OFF WhatsApp as social media chat option?"
+                                    data-subtitle-off="If disabled, WhatsApp chatting option will be hidden from the system."
+                                    data-icon="../../assets/backend/images/whatsapp-off.png"
+                                    checked
+                                    />
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="content-extra mt-3" style="display: none;">
+                            <div class="alert alert-success small py-2 mb-3 d-flex align-items-start gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                              class="mt-1">
+                              <path
+                                d="M2.606 0.135742L1.9402 0.838742L2.93086 1.88574L3.59571 1.18274L2.606 0.135742ZM11.295 0.135742L10.3043 1.18274L10.9696 1.88574L11.9598 0.839242L11.295 0.135742ZM6.95025 0.447742C6.7942 0.449076 6.63658 0.459742 6.47738 0.479742H6.46319C4.54523 0.712242 3.01881 2.35074 2.75353 4.36974C2.54169 5.99474 3.17533 7.46824 4.23125 8.41724C4.66311 8.80707 4.95525 9.3419 5.05877 9.93224V12.9322H6.13691C6.30147 13.2307 6.60174 13.4322 6.95025 13.4322C7.29875 13.4322 7.59902 13.2307 7.76358 12.9322H8.84172V10.9322H8.88617V10.3382C8.88617 9.60524 9.2465 8.86624 9.83191 8.29174C10.615 7.46274 11.2061 6.28524 11.2061 4.93274C11.2061 2.46274 9.28338 0.424742 6.95025 0.447742ZM6.95025 1.44774C8.77789 1.42074 10.2603 3.00274 10.2603 4.93274C10.2603 5.97974 9.80165 6.90174 9.16658 7.57274L9.18172 7.58874C8.55087 8.2043 8.14283 9.03325 8.02792 9.93274H5.95959C5.85555 9.07574 5.508 8.24624 4.85118 7.65124C4.01562 6.90124 3.51769 5.77124 3.68414 4.49524C3.89078 2.92024 5.09944 1.65374 6.58046 1.48024C6.70275 1.46231 6.82589 1.45163 6.9493 1.44824L6.95025 1.44774ZM0.330078 4.93274V5.93274H1.74869V4.93274H0.330078ZM12.1518 4.93274V5.93274H13.5704V4.93274H12.1518ZM2.93086 8.97974L1.94067 10.0262L2.606 10.7297L3.59524 9.68274L2.93086 8.97974ZM10.9696 8.97974L10.3048 9.68274L11.2945 10.7297L11.9598 10.0262L10.9696 8.97974ZM6.00451 10.9327H7.89599V11.9327H6.00451V10.9327Z"
+                                fill="#27AE60" />
+                            </svg>
+                            <div>
+                                Country code is auto-selected based on your business region.
+                            </div>
+                            </div>
+
+                            <label class="fw-semibold mb-2">Phone Number</label>
+                            <div class="input-group mb-3 flex-nowrap" style="width:100%;">
+                            <select class="form-select" style="flex:0 0 15%; max-width:15%;">
+                                <option selected>US +1</option>
+                                <option>UK +44</option>
+                                <option>IN +91</option>
+                                <option>BD +880</option>
+                            </select>
+                            <input type="text" class="form-control" placeholder="0000000000" style="flex:1 1 80%;" />
+                            </div>
+
+
+                            <div class="d-flex justify-content-end gap-2">
+                            <button class="btn btn-outline-secondary">Reset</button>
+                            <button class="btn btn-success">Save</button>
+                            </div>
+                        </div>
+                        </div>
+                    </section>
+
+                    <!-- Social Media Login -->
+                    <section class="card-custom p-4">
+                        <h5 class="fw-semibold mb-1">Social Media Login</h5>
+                        <p class="text-muted small mb-4">
+                        Allow customers to log in using their social media accounts.
+                        </p>
+
+                        <!-- Google Login -->
+                        <div class="content-box p-3 border rounded bg-white mb-3" style="border-color: #e9ecef !important;">
+                        <div class="d-flex flex-wrap justify-content-between align-items-center">
+                            <div>
+                            <h6 class="fw-semibold mb-0">Google Login</h6>
+                            <small class="text-muted">
+                                Enable Google login for customers. Toggle on and set credentials.
+                            </small><br />
+                            <a href="#" class="text-success fw-semibold small text-decoration-none">Get Credential Setup</a>
+                            </div>
+
+                            <div class="d-flex align-items-center gap-3">
+                            <span class="view-toggle text-success fw-semibold" data-expanded="false">
+                                View <i class="fa-solid fa-arrow-down"></i>
+                            </span>
+                           
+                            </div>
+                        </div>
+
+                        <div class="content-extra mt-3">
+                            <label class="fw-semibold mb-2">Callback URI</label>
+                            <div class="input-group mb-3">
+                            <input type="text" class="form-control" readonly
+                                    value="https://8valley.6amtech.com/customer/auth/login/google/callback" />
+                            <button class="btn btn-outline-success copy-btn" title="Copy">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                            </div>
+
+                            <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Store Client ID</label>
+                                <input type="text" class="form-control" placeholder="Ex: Client ID" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Store Client Secret Key</label>
+                                <input type="text" class="form-control" placeholder="Ex: Secret Key" />
+                            </div>
+                            </div>
+
+                            <div class="d-flex justify-content-end gap-2 mt-3">
+                            <button class="btn btn-outline-secondary">Reset</button>
+                            <button class="btn btn-success">Save</button>
+                            </div>
+                        </div>
+                        </div>
+
+                        <!-- Facebook Login -->
+                        <div class="login-box p-3 border rounded bg-white mb-3" style="border-color: #e9ecef !important;">
+                        <div class="d-flex flex-wrap justify-content-between align-items-center">
+                            <div>
+                            <h6 class="fw-semibold mb-0">Facebook Login</h6>
+                            <small class="text-muted">
+                                Enable Facebook login for customers.
+                            </small><br />
+                            <a href="#" class="text-success fw-semibold small text-decoration-none">Get Credential Setup</a>
+                            </div>
+
+                            <div class="d-flex align-items-center gap-3">
+                            <span class="view-toggle text-success fw-semibold" data-expanded="false">
+                                View <i class="fa-solid fa-arrow-down"></i>
+                            </span>
+                           
+                            </div>
+                        </div>
+
+                        <div class="login-extra mt-3" style="display: none ;">
+                            <label class="fw-semibold mb-2">Callback URI</label>
+                            <div class="input-group mb-3">
+                            <input type="text" class="form-control" readonly
+                                    value="https://8valley.6amtech.com/customer/auth/login/facebook/callback" />
+                            <button class="btn btn-outline-success copy-btn" title="Copy">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                            </div>
+
+                            <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">App ID</label>
+                                <input type="text" class="form-control" placeholder="Ex: App ID" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">App Secret</label>
+                                <input type="text" class="form-control" placeholder="Ex: App Secret" />
+                            </div>
+                            </div>
+
+                            <div class="d-flex justify-content-end gap-2 mt-3">
+                            <button class="btn btn-outline-secondary">Reset</button>
+                            <button class="btn btn-success">Save</button>
+                            </div>
+                        </div>
+                        </div>
+
+                        <!-- Apple Login -->
+                        <div class="login-box p-3 border rounded bg-white" style="border-color: #e9ecef !important;">
+                        <div class="d-flex flex-wrap justify-content-between align-items-center">
+                            <div>
+                            <h6 class="fw-semibold mb-0">Apple Login</h6>
+                            <small class="text-muted">
+                                Enable Apple login for customers.
+                            </small><br />
+                            <a href="#" class="text-success fw-semibold small text-decoration-none">Get Credential Setup</a>
+                            </div>
+
+                            <div class="d-flex align-items-center gap-3">
+                            <span class="view-toggle text-success fw-semibold" data-expanded="false">
+                                View <i class="fa-solid fa-arrow-down"></i>
+                            </span>
+                            
+                            </div>
+                        </div>
+
+                        <div class="login-extra mt-3" style="display: none;">
+                            <label class="fw-semibold mb-2">Callback URI</label>
+                            <div class="input-group mb-3">
+                            <input type="text" class="form-control" readonly
+                                    value="https://8valley.6amtech.com/customer/auth/login/apple/callback" />
+                            <button class="btn btn-outline-success copy-btn" title="Copy">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                            </div>
+
+                            <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Service ID</label>
+                                <input type="text" class="form-control" placeholder="Ex: Service ID" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Team ID</label>
+                                <input type="text" class="form-control" placeholder="Ex: Team ID" />
+                            </div>
+                            </div>
+
+                            <div class="d-flex justify-content-end gap-2 mt-3">
+                            <button class="btn btn-outline-secondary">Reset</button>
+                            <button class="btn btn-success">Save</button>
+                            </div>
+                        </div>
+                        </div>
+                    </section>
+                </form>
+            </div>
+            <!-- ================================
+              mail Configuration Section
+             =================================== -->
+            <div class="mt-2" id="mailConfigurcontent">
+                <form action="">
+                <section class="card card-custom p-4 mb-4">
+                  
+                        <div class="d-flex flex-wrap justify-content-between align-items-center border rounded p-3 bg-white" style="border-color: #e9ecef !important;">
+                        <div>
+                            <h5 class="fw-semibold mb-1">Mail configuration</h5>
+                            <p class="text-muted small mb-0">
+                            You can use following mail sending options from <a href="#">Email Template</a>.
+                            </p>
+                        </div>
+                        <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#sendMailModal">
+                            <i class="fa-solid fa-paper-plane"></i> Send test mail
+                        </button>
+                        </div>
+                </section>
+
+                <section class="card-custom p-4 mb-4">
+
+                    <div class="content-box border rounded p-3 bg-white" style="border-color: #e9ecef !important;">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center">
+                        <div class="mb-2 mb-md-0">
+                        <h6 class="fw-semibold mb-0">SMTP Mail Configuration</h6>
+                        <small class="text-muted"> Configure email sending using your own SMTP server.</small>
+                        </div>
+
+                        <div class="d-flex align-items-center gap-3">
+                        <span class="view-toggle text-success fw-semibold" data-expanded="false">
+                            View <i class="fa-solid fa-arrow-down"></i>
+                        </span>
+                        <div class="form-check form-switch m-0">
+                            <input
+                                class="form-check-input confirm-toggle"
+                                type="checkbox"
+                                data-title-on="Want to turn ON WhatsApp as social media chat option?"
+                                data-subtitle-on="If enabled, WhatsApp chatting option will be visible to customers."
+                                data-title-off="Want to turn OFF WhatsApp as social media chat option?"
+                                data-subtitle-off="If disabled, WhatsApp chatting option will be hidden from the system."
+                                data-icon="../../assets/backend/images/email.png"
+                                checked
+                                />
+                        </div>
+                        </div>
+                    </div>
+
+                        <div class="content-extra mt-3" style="display: none;">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                <label class="form-label">Mailer name</label>
+                                <input type="text" class="form-control" placeholder="Ex: Ex-Mailer">
+                                </div>
+                                <div class="col-md-6">
+                                <label class="form-label">Host</label>
+                                <input type="text" class="form-control" placeholder="Ex: smtp.mailtrap.io">
+                                </div>
+                                <div class="col-md-6">
+                                <label class="form-label">Driver</label>
+                                <input type="text" class="form-control" placeholder="Ex: smtp">
+                                </div>
+                                <div class="col-md-6">
+                                <label class="form-label">Port</label>
+                                <input type="text" class="form-control" placeholder="Ex: 587">
+                                </div>
+                                <div class="col-md-6">
+                                <label class="form-label">Username</label>
+                                <input type="text" class="form-control" placeholder="Ex: admin@domain.com">
+                                </div>
+                                <div class="col-md-6">
+                                <label class="form-label">Email ID</label>
+                                <input type="email" class="form-control" placeholder="Ex: example@sample.com">
+                                </div>
+                                <div class="col-md-6">
+                                <label class="form-label">Encryption</label>
+                                <input type="text" class="form-control" placeholder="Ex: TLS">
+                                </div>
+                                <div class="col-md-6">
+                                <label class="form-label">Password</label>
+                                <input type="password" class="form-control" placeholder="••••••••">
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-end gap-2 mt-3">
+                                <button class="btn btn-outline-secondary">Reset</button>
+                                <button class="btn btn-success">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="card-custom p-4 mb-4">
+
+                    <div class="content-box border rounded p-3 bg-white" style="border-color: #e9ecef !important;">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center">
+                        <div class="mb-2 mb-md-0">
+                        <h6 class="fw-semibold mb-0">Sendgrid Mail Configuration</h6>
+                        <small class="text-muted"> Send emails via Sendgrid’s secure cloud email service.</small>
+                        </div>
+
+                        <div class="d-flex align-items-center gap-3">
+                        <span class="view-toggle text-success fw-semibold" data-expanded="false">
+                            View <i class="fa-solid fa-arrow-down"></i>
+                        </span>
+                        <div class="form-check form-switch m-0">
+                            <input
+                                class="form-check-input confirm-toggle"
+                                type="checkbox"
+                                data-title-on="Want to turn ON WhatsApp as social media chat option?"
+                                data-subtitle-on="If enabled, WhatsApp chatting option will be visible to customers."
+                                data-title-off="Want to turn OFF WhatsApp as social media chat option?"
+                                data-subtitle-off="If disabled, WhatsApp chatting option will be hidden from the system."
+                                data-icon="../../assets/backend/images/email.png"
+                                checked
+                                />
+                        </div>
+                        </div>
+                    </div>
+
+                        <div class="content-extra mt-3" style="display: none;">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                <label class="form-label">Mailer name</label>
+                                <input type="text" class="form-control" placeholder="Ex: Ex-Mailer">
+                                </div>
+                                <div class="col-md-6">
+                                <label class="form-label">Host</label>
+                                <input type="text" class="form-control" placeholder="Ex: smtp.mailtrap.io">
+                                </div>
+                                <div class="col-md-6">
+                                <label class="form-label">Driver</label>
+                                <input type="text" class="form-control" placeholder="Ex: smtp">
+                                </div>
+                                <div class="col-md-6">
+                                <label class="form-label">Port</label>
+                                <input type="text" class="form-control" placeholder="Ex: 587">
+                                </div>
+                                <div class="col-md-6">
+                                <label class="form-label">Username</label>
+                                <input type="text" class="form-control" placeholder="Ex: admin@domain.com">
+                                </div>
+                                <div class="col-md-6">
+                                <label class="form-label">Email ID</label>
+                                <input type="email" class="form-control" placeholder="Ex: example@sample.com">
+                                </div>
+                                <div class="col-md-6">
+                                <label class="form-label">Encryption</label>
+                                <input type="text" class="form-control" placeholder="Ex: TLS">
+                                </div>
+                                <div class="col-md-6">
+                                <label class="form-label">Password</label>
+                                <input type="password" class="form-control" placeholder="••••••••">
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-end gap-2 mt-3">
+                                <button class="btn btn-outline-secondary">Reset</button>
+                                <button class="btn btn-success">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                </form>
+            </div>
+
+            <!-- ================================
+               SMS Configuration Section
+             =================================== -->
+            <div class="mt-2" id="smsConfigurContent" style="display:none;">
+              <div class="alert alert-success small py-2 mb-3 d-flex align-items-start gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                    class="mt-1">
+                    <path
+                      d="M2.606 0.135742L1.9402 0.838742L2.93086 1.88574L3.59571 1.18274L2.606 0.135742ZM11.295 0.135742L10.3043 1.18274L10.9696 1.88574L11.9598 0.839242L11.295 0.135742ZM6.95025 0.447742C6.7942 0.449076 6.63658 0.459742 6.47738 0.479742H6.46319C4.54523 0.712242 3.01881 2.35074 2.75353 4.36974C2.54169 5.99474 3.17533 7.46824 4.23125 8.41724C4.66311 8.80707 4.95525 9.3419 5.05877 9.93224V12.9322H6.13691C6.30147 13.2307 6.60174 13.4322 6.95025 13.4322C7.29875 13.4322 7.59902 13.2307 7.76358 12.9322H8.84172V10.9322H8.88617V10.3382C8.88617 9.60524 9.2465 8.86624 9.83191 8.29174C10.615 7.46274 11.2061 6.28524 11.2061 4.93274C11.2061 2.46274 9.28338 0.424742 6.95025 0.447742ZM6.95025 1.44774C8.77789 1.42074 10.2603 3.00274 10.2603 4.93274C10.2603 5.97974 9.80165 6.90174 9.16658 7.57274L9.18172 7.58874C8.55087 8.2043 8.14283 9.03325 8.02792 9.93274H5.95959C5.85555 9.07574 5.508 8.24624 4.85118 7.65124C4.01562 6.90124 3.51769 5.77124 3.68414 4.49524C3.89078 2.92024 5.09944 1.65374 6.58046 1.48024C6.70275 1.46231 6.82589 1.45163 6.9493 1.44824L6.95025 1.44774ZM0.330078 4.93274V5.93274H1.74869V4.93274H0.330078ZM12.1518 4.93274V5.93274H13.5704V4.93274H12.1518ZM2.93086 8.97974L1.94067 10.0262L2.606 10.7297L3.59524 9.68274L2.93086 8.97974ZM10.9696 8.97974L10.3048 9.68274L11.2945 10.7297L11.9598 10.0262L10.9696 8.97974ZM6.00451 10.9327H7.89599V11.9327H6.00451V10.9327Z"
+                      fill="#27AE60" />
+                  </svg>
+                  <div>
+                      <span>
+                            This sms gateway will work for
+                            <a href="" target="_blank" class="text-decoration-underline fw-semibold ">
+                                OTP verification
+                            </a> Or
+                            <a href="" target="_blank" class="text-decoration-underline fw-semibold">
+                                Notification
+                            </a> Through SMS
+                        </span>
+                  </div>
+                </div>
+                <div class="alert alert-warning small py-2 mb-3 d-flex align-items-start gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none"
+                    class="">
+                    <path
+                      d="M8.57261 15.7842C12.4129 15.7842 15.5261 12.6502 15.5261 8.78418C15.5261 4.91819 12.4129 1.78418 8.57261 1.78418C4.73231 1.78418 1.61914 4.91819 1.61914 8.78418C1.61914 12.6502 4.73231 15.7842 8.57261 15.7842Z"
+                      fill="#FCBA4A" stroke="#FCBA4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M8.57227 8.91113V11.7111" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                    <path d="M8.57227 5.8584L8.57227 6.11064" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                  <div>
+                      <span>
+                            Please recheck if you have put all the data correctly or contact your sms gateway provider for assistance.
+                        </span>
+                  </div>
+                </div>
+              <form action="">
+                
+                <!-- Header -->
+                <section class="card card-custom p-4 mb-4">
+
+              <div class="border rounded p-3 bg-white" style="border-color: #e9ecef !important;">
+                <!-- Header Text -->
+                <h5 class="fw-semibold mb-1">SMS Configuration</h5>
+                <p class="text-muted small mb-3">
+                  Choose the SMS model you want to use for OTP & other SMS notifications.
+                </p>
+
+                <!-- Alert Message -->
+                <div class="alert alert-danger small d-flex align-items-center gap-2 mb-0" 
+                    style="background: #fdecec; color: #e74c3c; border: none;">
+                  <i class="fa-solid fa-triangle-exclamation"></i>
+                  <span>3rd party is not set up yet. Please configure it first to ensure it works properly.</span>
+                </div>
+              </div>
+                </section>
+
+                <!-- Select SMS Configuration Model -->
+                <section class="card-custom p-4 mb-4">
+                  <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+                    <h6 class="fw-semibold mb-0">Select SMS Configuration Model</h6>
+                    <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#sendSmsModal">
+                      <i class="fa-solid fa-paper-plane"></i> Send test SMS
+                    </button>
+                  </div>
+
+                  <div class="border rounded p-3 bg-white" style="border-color:#e9ecef !important;">
+                   <div class="row g-3">
+                      <!-- 3rd Party -->
+                      <div class="col-12 col-md-6">
+                        <div class="card h-100 border border-light-subtle shadow-sm" style="border-color:#e9ecef !important;">
+                          <div class="card-body d-flex justify-content-between align-items-center">
+                            <div class="flex-grow-1 pe-3">
+                              <h6 class="fw-semibold mb-1">3rd Party</h6>
+                              <p class="small text-muted mb-0">
+                                You have to setup an SMS module below first to activate this feature.
+                              </p>
+                            </div>
+                            <div class="form-check">
+                              <input
+                                class="form-check-input confirm-toggle"
+                                type="radio"
+                                data-title-on="Are you sure you want to use third party gateway for SMS?"
+                                data-subtitle-on="If enabled, please click OK."
+                                data-title-off="Are you sure you want to disable third party gateway for SMS?"
+                                data-subtitle-off="If disabled, please click OK."
+                                data-icon="../../assets/backend/images/config-status-change.png"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Firebase OTP -->
+                      <div class="col-12 col-md-6">
+                        <div class="card h-100 border border-light-subtle shadow-sm" style="border-color:#e9ecef !important;">
+                          <div class="card-body d-flex justify-content-between align-items-center">
+                            <div class="flex-grow-1 pe-3">
+                              <h6 class="fw-semibold mb-1">Firebase OTP</h6>
+                              <p class="small text-muted mb-0">
+                                Setup necessary
+                                <a href="#" class="link-success text-decoration-none">Firebase Configurations</a>.
+                              </p>
+                            </div>
+                            <div class="form-check">
+                              <input
+                                class="form-check-input confirm-toggle"
+                                type="radio"
+                                data-title-on="Are you sure you want to use Firebase OTP?"
+                                data-subtitle-on="If enabled, please click OK."
+                                data-title-off="Are you sure you want to disable Firebase OTP?"
+                                data-subtitle-off="If disabled, please click OK."
+                                data-icon="../../assets/backend/images/config-status-change.png"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </section>
+
+                <!-- ================================
+                    3rd Party SMS Gateways
+                ================================= -->
+                <section class="card-custom p-4 mb-4">
+                  <h6 class="fw-semibold mb-3">3rd Party SMS Gateways</h6>
+
+                  <!-- Gateway Template -->
+                  <!-- Each Gateway Box -->
+                  <div class="content-box border rounded p-3 bg-white mb-3" style="border-color: #e9ecef !important;">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center">
+                      <div class="mb-2 mb-md-0">
+                        <h6 class="fw-semibold mb-0">2Factor</h6>
+                        <small class="text-muted">Setup 2Factor as your SMS gateway.</small>
+                      </div>
+                      <div class="d-flex align-items-center gap-3">
+                        <span class="view-toggle text-success fw-semibold" data-expanded="false">
+                          View <i class="fa-solid fa-arrow-down"></i>
+                        </span>
+                        <div class="form-check form-switch m-0">
+                          <input
+                            class="form-check-input confirm-toggle"
+                            type="checkbox"
+                            data-title-on="Enable 2Factor Gateway?"
+                            data-subtitle-on="If enabled, 2Factor will be used for SMS sending."
+                            data-title-off="Disable 2Factor Gateway?"
+                            data-subtitle-off="If disabled, 2Factor SMS sending will be turned off."
+                            data-icon="../../assets/backend/images/2factor.png"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="content-extra mt-3" style="display:none;">
+                      <div class="row g-3">
+                        <div class="col-md-6">
+                          <label class="form-label">API Key *</label>
+                          <input type="text" class="form-control" placeholder="API Key">
+                        </div>
+                        <div class="col-md-6">
+                          <label class="form-label">OTP Template *</label>
+                          <input type="text" class="form-control" placeholder="OTP Template">
+                        </div>
+                      </div>
+                      <div class="d-flex justify-content-end gap-2 mt-3">
+                        <button class="btn btn-outline-secondary">Reset</button>
+                        <button class="btn btn-success">Save</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- MSG91 -->
+                  <div class="content-box border rounded p-3 bg-white mb-3" style="border-color: #e9ecef !important;">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center">
+                      <div>
+                        <h6 class="fw-semibold mb-0">MSG91</h6>
+                        <small class="text-muted">Setup MSG91 as SMS gateway.</small>
+                      </div>
+                      <div class="d-flex align-items-center gap-3">
+                        <span class="view-toggle text-success fw-semibold" data-expanded="false">
+                          View <i class="fa-solid fa-arrow-down"></i>
+                        </span>
+                        <div class="form-check form-switch m-0">
+                          <input
+                            class="form-check-input confirm-toggle"
+                            type="checkbox"
+                            data-title-on="Enable MSG91 Gateway?"
+                            data-subtitle-on="If enabled, MSG91 will be used for SMS sending."
+                            data-title-off="Disable MSG91 Gateway?"
+                            data-subtitle-off="If disabled, MSG91 will be turned off."
+                            data-icon="../../assets/backend/images/msg91.png"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="content-extra mt-3" style="display:none;">
+                      <div class="row g-3">
+                        <div class="col-md-6">
+                          <label class="form-label">Template ID *</label>
+                          <input type="text" class="form-control" placeholder="Template ID">
+                        </div>
+                        <div class="col-md-6">
+                          <label class="form-label">Auth Key *</label>
+                          <input type="text" class="form-control" placeholder="Auth Key">
+                        </div>
+                      </div>
+                      <div class="d-flex justify-content-end gap-2 mt-3">
+                        <button class="btn btn-outline-secondary">Reset</button>
+                        <button class="btn btn-success">Save</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- AlphaneT -->
+                  <div class="content-box border rounded p-3 bg-white mb-3" style="border-color: #e9ecef !important;">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center">
+                      <div>
+                        <h6 class="fw-semibold mb-0">Alphanet SMS</h6>
+                        <small class="text-muted">Setup AlphaneT as SMS gateway.</small>
+                      </div>
+                      <div class="d-flex align-items-center gap-3">
+                        <span class="view-toggle text-success fw-semibold" data-expanded="false">
+                          View <i class="fa-solid fa-arrow-down"></i>
+                        </span>
+                        <div class="form-check form-switch m-0">
+                          <input
+                            class="form-check-input confirm-toggle"
+                            type="checkbox"
+                            data-title-on="Enable AlphaneT Gateway?"
+                            data-subtitle-on="If enabled, AlphaneT will be used for SMS sending."
+                            data-title-off="Disable AlphaneT Gateway?"
+                            data-subtitle-off="If disabled, AlphaneT will be turned off."
+                            data-icon="../../assets/backend/images/alphanet_sms.png"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="content-extra mt-3" style="display:none;">
+                      <div class="row g-3">
+                        <div class="col-md-6">
+                          <label class="form-label">API Key *</label>
+                          <input type="text" class="form-control" placeholder="API Key">
+                        </div>
+                        <div class="col-md-6">
+                          <label class="form-label">OTP Template *</label>
+                          <input type="text" class="form-control" placeholder="OTP Template">
+                        </div>
+                      </div>
+                      <div class="d-flex justify-content-end gap-2 mt-3">
+                        <button class="btn btn-outline-secondary">Reset</button>
+                        <button class="btn btn-success">Save</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Releans -->
+                  <div class="content-box border rounded p-3 bg-white mb-3" style="border-color: #e9ecef !important;">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center">
+                      <div>
+                        <h6 class="fw-semibold mb-0">Releans</h6>
+                        <small class="text-muted">Setup Releans as SMS gateway.</small>
+                      </div>
+                      <div class="d-flex align-items-center gap-3">
+                        <span class="view-toggle text-success fw-semibold" data-expanded="false">
+                          View <i class="fa-solid fa-arrow-down"></i>
+                        </span>
+                        <div class="form-check form-switch m-0">
+                          <input
+                            class="form-check-input confirm-toggle"
+                            type="checkbox"
+                            data-title-on="Enable Releans Gateway?"
+                            data-subtitle-on="If enabled, Releans will be used for SMS sending."
+                            data-title-off="Disable Releans Gateway?"
+                            data-subtitle-off="If disabled, Releans will be turned off."
+                            data-icon="../../assets/backend/images/releans.png"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="content-extra mt-3" style="display:none;">
+                      <div class="row g-3">
+                        <div class="col-md-4">
+                          <label class="form-label">API Key *</label>
+                          <input type="text" class="form-control" placeholder="API Key">
+                        </div>
+                        <div class="col-md-4">
+                          <label class="form-label">From *</label>
+                          <input type="text" class="form-control" placeholder="From">
+                        </div>
+                        <div class="col-md-4">
+                          <label class="form-label">OTP Template *</label>
+                          <input type="text" class="form-control" placeholder="OTP Template">
+                        </div>
+                      </div>
+                      <div class="d-flex justify-content-end gap-2 mt-3">
+                        <button class="btn btn-outline-secondary">Reset</button>
+                        <button class="btn btn-success">Save</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Twilio -->
+                  <div class="content-box border rounded p-3 bg-white mb-3" style="border-color: #e9ecef !important;">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center">
+                      <div>
+                        <h6 class="fw-semibold mb-0">Twilio</h6>
+                        <small class="text-muted">Setup Twilio as SMS gateway.</small>
+                      </div>
+                      <div class="d-flex align-items-center gap-3">
+                        <span class="view-toggle text-success fw-semibold" data-expanded="false">
+                          View <i class="fa-solid fa-arrow-down"></i>
+                        </span>
+                        <div class="form-check form-switch m-0">
+                          <input
+                            class="form-check-input confirm-toggle"
+                            type="checkbox"
+                            data-title-on="Enable Twilio Gateway?"
+                            data-subtitle-on="If enabled, Twilio will be used for SMS sending."
+                            data-title-off="Disable Twilio Gateway?"
+                            data-subtitle-off="If disabled, Twilio will be turned off."
+                            data-icon="../../assets/backend/images/twilio.png"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="content-extra mt-3" style="display:none;">
+                      <div class="row g-3">
+                        <div class="col-md-6">
+                          <label class="form-label">SID *</label>
+                          <input type="text" class="form-control" placeholder="SID">
+                        </div>
+                        <div class="col-md-6">
+                          <label class="form-label">Messaging Service SID *</label>
+                          <input type="text" class="form-control" placeholder="Messaging Service SID">
+                        </div>
+                        <div class="col-md-6">
+                          <label class="form-label">Token *</label>
+                          <input type="text" class="form-control" placeholder="Token">
+                        </div>
+                        <div class="col-md-6">
+                          <label class="form-label">From *</label>
+                          <input type="text" class="form-control" placeholder="From">
+                        </div>
+                        <div class="col-12">
+                          <label class="form-label">OTP Template *</label>
+                          <input type="text" class="form-control" placeholder="OTP Template">
+                        </div>
+                      </div>
+                      <div class="d-flex justify-content-end gap-2 mt-3">
+                        <button class="btn btn-outline-secondary">Reset</button>
+                        <button class="btn btn-success">Save</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Nexmo -->
+                  <div class="content-box border rounded p-3 bg-white mb-3" style="border-color: #e9ecef !important;">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center">
+                      <div>
+                        <h6 class="fw-semibold mb-0">Nexmo</h6>
+                        <small class="text-muted">Setup Nexmo as SMS gateway.</small>
+                      </div>
+                      <div class="d-flex align-items-center gap-3">
+                        <span class="view-toggle text-success fw-semibold" data-expanded="false">
+                          View <i class="fa-solid fa-arrow-down"></i>
+                        </span>
+                        <div class="form-check form-switch m-0">
+                          <input
+                            class="form-check-input confirm-toggle"
+                            type="checkbox"
+                            data-title-on="Enable Nexmo Gateway?"
+                            data-subtitle-on="If enabled, Nexmo will be used for SMS sending."
+                            data-title-off="Disable Nexmo Gateway?"
+                            data-subtitle-off="If disabled, Nexmo will be turned off."
+                            data-icon="../../assets/backend/images/nexmo.png"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="content-extra mt-3" style="display:none;">
+                      <div class="row g-3">
+                        <div class="col-md-4">
+                          <label class="form-label">API Key *</label>
+                          <input type="text" class="form-control" placeholder="API Key">
+                        </div>
+                        <div class="col-md-4">
+                          <label class="form-label">API Secret *</label>
+                          <input type="text" class="form-control" placeholder="API Secret">
+                        </div>
+                        <div class="col-md-4">
+                          <label class="form-label">Token *</label>
+                          <input type="text" class="form-control" placeholder="Token">
+                        </div>
+                        <div class="col-md-6">
+                          <label class="form-label">From *</label>
+                          <input type="text" class="form-control" placeholder="From">
+                        </div>
+                        <div class="col-md-6">
+                          <label class="form-label">OTP Template *</label>
+                          <input type="text" class="form-control" placeholder="OTP Template">
+                        </div>
+                      </div>
+                      <div class="d-flex justify-content-end gap-2 mt-3">
+                        <button class="btn btn-outline-secondary">Reset</button>
+                        <button class="btn btn-success">Save</button>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </form>
+            </div>
+
+            <!-- ================================
+               RECAPTCHA CONFIGURATION SECTION
+            ================================ -->
+            <div id="recaptchaContent" class="mt-2" style="display:none;">
+              <form action="">
+
+                <!-- Header with Status Toggle -->
+                <section class="card card-custom p-4 mb-4">
+                  <div class="border rounded p-3 bg-white d-flex justify-content-between align-items-center" style="border-color:#e9ecef !important;">
+                    
+                    <!-- Left Text -->
+                    <div>
+                      <h6 class="fw-semibold mb-1">ReCAPTCHA</h6>
+                      <p class="text-muted small mb-0">
+                        If you turn this feature on, users will need to verify through Google reCAPTCHA.
+                      </p>
+                    </div>
+
+                    <!-- Right Toggle -->
+                    <div class="d-flex align-items-center border rounded px-3 py-2" style="border-color:#e9ecef !important; min-width: 180px; justify-content: space-between;">
+                      <span class="fw-semibold">Status</span>
+                      <div class="form-check form-switch m-0">
+                        <input
+                          class="form-check-input confirm-toggle"
+                          type="checkbox"
+                          data-title-on="Enable Google reCAPTCHA?"
+                          data-subtitle-on="If enabled, reCAPTCHA verification will be required."
+                          data-title-off="Disable Google reCAPTCHA?"
+                          data-subtitle-off="If disabled, reCAPTCHA verification will be turned off."
+                          data-icon="../../assets/backend/images/switch.png"
+                        />
+                      </div>
+                    </div>
+
+                  </div>
+                </section>
+
+
+                <!-- Alert -->
+                <div class="alert alert-warning small d-flex align-items-start gap-2" role="alert">
+                  <i class="fa-solid fa-circle-exclamation mt-1"></i>
+                  <div>
+                    <strong>V3 version is available!</strong> You must set up Google reCAPTCHA v3 credentials.
+                    Otherwise, the default reCAPTCHA will be displayed automatically.
+                  </div>
+                </div>
+
+                <!-- Credentials -->
+                <section class="card card-custom p-4 mb-4">
+                  <div class="border rounded p-4 bg-white" style="border-color:#e9ecef !important;">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                      <div>
+                        <h6 class="fw-semibold mb-1">Google reCAPTCHA Credentials</h6>
+                        <p class="text-muted small mb-0">
+                          Fill in Google reCAPTCHA credentials to set up & activate this feature properly.
+                        </p>
+                      </div>
+                      <a href="#" class="link-success small fw-semibold text-decoration-none" 
+                        data-bs-toggle="modal" data-bs-target="#recaptchaInstructionModal">
+                        How to get credential
+                      </a>
+
+                    </div>
+
+                    <div class="row g-3">
+                      <div class="col-md-6">
+                        <label class="form-label fw-semibold">Site Key</label>
+                        <input type="text" class="form-control" placeholder="Enter your Site Key">
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label fw-semibold">Secret Key</label>
+                        <input type="text" class="form-control" placeholder="Enter your Secret Key">
+                      </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end gap-2 mt-4">
+                      <button type="reset" class="btn btn-outline-secondary">Reset</button>
+                      <button type="submit" class="btn btn-success">Save</button>
+                    </div>
+                  </div>
+                </section>
+
+              </form>
+            </div>
+
+            <!-- ================================
+               google map Configuration Section
+             =================================== -->
+            <div class="mt-2" id="googleMapContent" style="display:none;">
+               <div class="alert alert-success small py-2 mb-3 d-flex align-items-start gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                    class="mt-1">
+                    <path
+                      d="M2.606 0.135742L1.9402 0.838742L2.93086 1.88574L3.59571 1.18274L2.606 0.135742ZM11.295 0.135742L10.3043 1.18274L10.9696 1.88574L11.9598 0.839242L11.295 0.135742ZM6.95025 0.447742C6.7942 0.449076 6.63658 0.459742 6.47738 0.479742H6.46319C4.54523 0.712242 3.01881 2.35074 2.75353 4.36974C2.54169 5.99474 3.17533 7.46824 4.23125 8.41724C4.66311 8.80707 4.95525 9.3419 5.05877 9.93224V12.9322H6.13691C6.30147 13.2307 6.60174 13.4322 6.95025 13.4322C7.29875 13.4322 7.59902 13.2307 7.76358 12.9322H8.84172V10.9322H8.88617V10.3382C8.88617 9.60524 9.2465 8.86624 9.83191 8.29174C10.615 7.46274 11.2061 6.28524 11.2061 4.93274C11.2061 2.46274 9.28338 0.424742 6.95025 0.447742ZM6.95025 1.44774C8.77789 1.42074 10.2603 3.00274 10.2603 4.93274C10.2603 5.97974 9.80165 6.90174 9.16658 7.57274L9.18172 7.58874C8.55087 8.2043 8.14283 9.03325 8.02792 9.93274H5.95959C5.85555 9.07574 5.508 8.24624 4.85118 7.65124C4.01562 6.90124 3.51769 5.77124 3.68414 4.49524C3.89078 2.92024 5.09944 1.65374 6.58046 1.48024C6.70275 1.46231 6.82589 1.45163 6.9493 1.44824L6.95025 1.44774ZM0.330078 4.93274V5.93274H1.74869V4.93274H0.330078ZM12.1518 4.93274V5.93274H13.5704V4.93274H12.1518ZM2.93086 8.97974L1.94067 10.0262L2.606 10.7297L3.59524 9.68274L2.93086 8.97974ZM10.9696 8.97974L10.3048 9.68274L11.2945 10.7297L11.9598 10.0262L10.9696 8.97974ZM6.00451 10.9327H7.89599V11.9327H6.00451V10.9327Z"
+                      fill="#27AE60" />
+                  </svg>
+                  <div>
+                      <span>
+                            Client key should have enable map Javascript API And you can restrict it with http referServer Key Should have enable place api key and you can restrict it with ip you can use same api for both field without any restrictions.
+                        </span>
+                  </div>
+               </div>
+                <div class="alert alert-warning small py-2 mb-3 d-flex align-items-start gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none"
+                    class="">
+                    <path
+                      d="M8.57261 15.7842C12.4129 15.7842 15.5261 12.6502 15.5261 8.78418C15.5261 4.91819 12.4129 1.78418 8.57261 1.78418C4.73231 1.78418 1.61914 4.91819 1.61914 8.78418C1.61914 12.6502 4.73231 15.7842 8.57261 15.7842Z"
+                      fill="#FCBA4A" stroke="#FCBA4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M8.57227 8.91113V11.7111" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                    <path d="M8.57227 5.8584L8.57227 6.11064" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                  <div>
+                      <span>
+                            Without configuring this section map functionality will not work properly thusthe whole system will not work as it planned.
+                        </span>
+                  </div>
+                </div>
+
+                <form action="">
+                  <!-- Google Map API Section -->
+                  <section class="card card-custom p-4 mb-4">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center border rounded p-3 bg-white" style="border-color:#e9ecef !important;">
+                      <div>
+                        <h5 class="fw-semibold mb-1">Google Map API</h5>
+                        <p class="text-muted small mb-0">
+                          Fill-up Google APIs credentials to setup & activate google map integration to your system.
+                        </p>
+                      </div>
+
+                      <div class="d-flex align-items-center gap-2">
+                        <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#mapViewModal">
+                          <i class="fa-solid fa-map-location-dot me-1"></i> Test Map View
+                        </button>
+                        <div class="form-check form-switch m-0">
+                          <input
+                                class="form-check-input confirm-toggle"
+                                type="radio"
+                                data-title-on="Want to turn ON map?"
+                                data-subtitle-on="If enabled map will be hidden from the system."
+                                data-title-off="Want to turn OFF map?"
+                                data-subtitle-off="If enabled map will be hidden from the system."
+                                data-icon="../../assets/backend/images/location.png"
+                              />
+                          <label class="form-check-label fw-semibold ms-2">Status</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="mt-4">
+                      <div class="row g-3">
+                        <div class="col-md-6">
+                          <label class="form-label fw-semibold">Map API Key (Client)</label>
+                          <input type="text" class="form-control" placeholder="Map API Key (Client)">
+                        </div>
+                        <div class="col-md-6">
+                          <label class="form-label fw-semibold">Map API Key (Server)</label>
+                          <input type="text" class="form-control" placeholder="Map API Key (Server)">
+                        </div>
+                      </div>
+                      <div class="d-flex justify-content-end gap-2 mt-3">
+                        <button class="btn btn-outline-secondary">Reset</button>
+                        <button class="btn btn-success">Save</button>
+                      </div>
+                    </div>
+                  </section>
+                </form>
+             
+            </div>
+            <!-- ================================
+               Storage Connnection Section
+             =================================== -->
+            <div class="mt-2" id="storageConnectionContent" style="display:none;">
+                <div class="alert alert-success small py-2 mb-3 d-flex align-items-start gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                    class="mt-1">
+                    <path
+                      d="M2.606 0.135742L1.9402 0.838742L2.93086 1.88574L3.59571 1.18274L2.606 0.135742ZM11.295 0.135742L10.3043 1.18274L10.9696 1.88574L11.9598 0.839242L11.295 0.135742ZM6.95025 0.447742C6.7942 0.449076 6.63658 0.459742 6.47738 0.479742H6.46319C4.54523 0.712242 3.01881 2.35074 2.75353 4.36974C2.54169 5.99474 3.17533 7.46824 4.23125 8.41724C4.66311 8.80707 4.95525 9.3419 5.05877 9.93224V12.9322H6.13691C6.30147 13.2307 6.60174 13.4322 6.95025 13.4322C7.29875 13.4322 7.59902 13.2307 7.76358 12.9322H8.84172V10.9322H8.88617V10.3382C8.88617 9.60524 9.2465 8.86624 9.83191 8.29174C10.615 7.46274 11.2061 6.28524 11.2061 4.93274C11.2061 2.46274 9.28338 0.424742 6.95025 0.447742ZM6.95025 1.44774C8.77789 1.42074 10.2603 3.00274 10.2603 4.93274C10.2603 5.97974 9.80165 6.90174 9.16658 7.57274L9.18172 7.58874C8.55087 8.2043 8.14283 9.03325 8.02792 9.93274H5.95959C5.85555 9.07574 5.508 8.24624 4.85118 7.65124C4.01562 6.90124 3.51769 5.77124 3.68414 4.49524C3.89078 2.92024 5.09944 1.65374 6.58046 1.48024C6.70275 1.46231 6.82589 1.45163 6.9493 1.44824L6.95025 1.44774ZM0.330078 4.93274V5.93274H1.74869V4.93274H0.330078ZM12.1518 4.93274V5.93274H13.5704V4.93274H12.1518ZM2.93086 8.97974L1.94067 10.0262L2.606 10.7297L3.59524 9.68274L2.93086 8.97974ZM10.9696 8.97974L10.3048 9.68274L11.2945 10.7297L11.9598 10.0262L10.9696 8.97974ZM6.00451 10.9327H7.89599V11.9327H6.00451V10.9327Z"
+                      fill="#27AE60" />
+                  </svg>
+                  <div>
+                      <span>
+                           You can manage all your storage files from Gallery.
+                        </span>
+                  </div>
+               </div>
+                <form action="">
+                  <!-- Storage Connection Section -->
+                  <section class="card card-custom p-4 mb-4">
+                    <div class="border rounded p-3 bg-white" style="border-color: #e9ecef !important;">
+                      <h5 class="fw-semibold mb-1">Storage Connection</h5>
+                      <p class="text-muted small mb-3">
+                        Choose the storage model you want to use for file & data storage.
+                      </p>
+                      <div class="alert alert-warning small py-2 mb-3 d-flex align-items-start gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none"
+                    class="">
+                    <path
+                      d="M8.57261 15.7842C12.4129 15.7842 15.5261 12.6502 15.5261 8.78418C15.5261 4.91819 12.4129 1.78418 8.57261 1.78418C4.73231 1.78418 1.61914 4.91819 1.61914 8.78418C1.61914 12.6502 4.73231 15.7842 8.57261 15.7842Z"
+                      fill="#FCBA4A" stroke="#FCBA4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M8.57227 8.91113V11.7111" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                    <path d="M8.57227 5.8584L8.57227 6.11064" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                  <div>
+                      <span>
+                           3rd party storage is not set up yet. Please configure it first to ensure it works properly.
+                        </span>
+                  </div>
+                </div>
+                    </div>
+                  </section>
+
+                  <!-- Select Storage Model -->
+                  <section class="card-custom p-4 mb-4">
+                    <h6 class="fw-semibold mb-3">Select Storage Connection Model</h6>
+
+                    <div class="border rounded p-3 bg-white" style="border-color: #e9ecef !important;">
+                      <div class="row g-3">
+                        <!-- Local Storage -->
+                        <div class="col-md-6">
+                          <div class="card h-100 border border-light-subtle shadow-sm" style="border-color:#e9ecef !important;">
+                            <div class="card-body d-flex justify-content-between align-items-center">
+                              <div class="flex-grow-1 pe-3">
+                                <h6 class="fw-semibold mb-1">Local Storage</h6>
+                                <p class="small text-muted mb-0">
+                                  If enabled, newly uploaded or created files and data will store to local storage.
+                                </p>
+                              </div>
+                              <div class="form-check">
+                                <input
+                                class="form-check-input confirm-toggle"
+                                type="radio"
+                                data-title-on="Do you want to switch 3rd party storage to local storage ?"
+                                data-subtitle-on="If you switch this newly uploaded created files & data will store to local storage."
+                                data-title-off="Do you want to switch 3rd party storage to local storage ?"
+                                data-subtitle-off="If you switch this newly uploaded created files & data will store to local storage."
+                                data-icon="../../assets/backend/images/gallery.png"
+                              />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- 3rd Party Storage -->
+                        <div class="col-md-6">
+                          <div class="card h-100 border border-light-subtle shadow-sm" style="border-color:#e9ecef !important;">
+                            <div class="card-body d-flex justify-content-between align-items-center">
+                              <div class="flex-grow-1 pe-3">
+                                <h6 class="fw-semibold mb-1">3rd Party Storage</h6>
+                                <p class="small text-muted mb-0">
+                                  If enabled, files will store to 3rd party storage services like Amazon S3.
+                                </p>
+                              </div>
+                              <div class="form-check">
+                                <input
+                                class="form-check-input confirm-toggle"
+                                type="radio"
+                                data-title-on="Are you sure you want to use third party gateway for SMS?"
+                                data-subtitle-on="If enabled, please click OK."
+                                data-title-off="Are you sure you want to disable third party gateway for SMS?"
+                                data-subtitle-off="If disabled, please click OK."
+                                data-icon="../../assets/backend/images/gallery.png"
+                              />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+
+                  <!-- S3 Credential Section -->
+                  <section class="card-custom p-4 mb-4">
+                    <h6 class="fw-semibold mb-3">S3 Credential</h6>
+                    <p class="text-muted small mb-3">
+                      The Access Key ID is a publicly accessible identifier used to authenticate requests to S3. 
+                      <a href="#" class="text-success text-decoration-none">Learn More</a>
+                    </p>
+
+                     <div class="border rounded p-4 bg-white" style="border-color: #e9ecef !important;">
+                        <!-- Access Key -->
+                        <div class="row align-items-center mb-4">
+                          <div class="col-md-3">
+                            <label class="fw-semibold mb-1">Access key</label>
+                            <p class="text-muted small mb-0">Your unique public key used to authenticate s3 requests.</p>
+                          </div>
+                          <div class="col-md-9">
+                            <input type="text" class="form-control" placeholder="Enter your access key">
+                          </div>
+                        </div>
+
+                        <!-- Secret Access Key -->
+                        <div class="row align-items-center mb-4">
+                          <div class="col-md-3">
+                            <label class="fw-semibold mb-1">Secret access key</label>
+                            <p class="text-muted small mb-0">The private key paired with your access key for secure authentication.</p>
+                          </div>
+                          <div class="col-md-9">
+                            <input type="password" class="form-control" placeholder="Enter your secret access key">
+                          </div>
+                        </div>
+
+                        <!-- Region -->
+                        <div class="row align-items-center mb-4">
+                          <div class="col-md-3">
+                            <label class="fw-semibold mb-1">Region</label>
+                            <p class="text-muted small mb-0">The AWS region where your s3 bucket is hosted.</p>
+                          </div>
+                          <div class="col-md-9">
+                            <input type="text" class="form-control" placeholder="Enter your region">
+                          </div>
+                        </div>
+
+                        <!-- Bucket -->
+                        <div class="row align-items-center mb-4">
+                          <div class="col-md-3">
+                            <label class="fw-semibold mb-1">Bucket</label>
+                            <p class="text-muted small mb-0">The name of the s3 bucket where your files will be stored.</p>
+                          </div>
+                          <div class="col-md-9">
+                            <input type="text" class="form-control" placeholder="Enter your bucket">
+                          </div>
+                        </div>
+
+                        <!-- URL -->
+                        <div class="row align-items-center mb-4">
+                          <div class="col-md-3">
+                            <label class="fw-semibold mb-1">URL</label>
+                            <p class="text-muted small mb-0">The base URL used to access your s3 bucket.</p>
+                          </div>
+                          <div class="col-md-9">
+                            <input type="text" class="form-control" placeholder="Enter your URL">
+                          </div>
+                        </div>
+
+                        <!-- Endpoint -->
+                        <div class="row align-items-center mb-4">
+                          <div class="col-md-3">
+                            <label class="fw-semibold mb-1">Endpoint</label>
+                            <p class="text-muted small mb-0">
+                              The custom endpoint for your s3-compatible storage (optional for AWS s3).
+                            </p>
+                          </div>
+                          <div class="col-md-9">
+                            <input type="text" class="form-control" placeholder="Enter your endpoint">
+                          </div>
+                        </div>
+
+                      </div>
+                  </section>
+                  <div class="d-flex justify-content-end gap-2 mt-3">
+                    <button class="btn btn-outline-secondary">Reset</button>
+                    <button class="btn btn-success">Save</button>
+                  </div>
+                </form>
+
+               
+             
+            </div>
+
+
+                    
+           
+
+      </section>
+
+
+    </main>
+    <!-- Main Section End -->
+  </div>
+  <!-- Dashboard Area End -->
+
+<!-- Confirm Modal -->
+<div class="modal fade" id="ConfirmModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-center p-4" style="border-radius:12px;">
+
+        <!-- Icon -->
+        <div class="mb-3">
+            <img id="confirmModalIcon" src="" alt="Icon" style="width:100px; height:auto;">
+        </div>
+
+        <!-- Title -->
+        <h5 id="confirmModalTitle" class="fw-bold mb-2" style="color:#27AE60;"></h5>
+
+        <!-- Subtitle -->
+        <p id="confirmModalSubtitle" class="text-muted small mb-4"></p>
+
+        <!-- Buttons -->
+        <div class="d-flex justify-content-center gap-3">
+            <button type="button" class="btn btn-light px-4" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-success px-4" id="modalConfirmBtn">OK</button>
+        </div>
+        </div>
+    </div>
+   </div>
+<!---test mail modal-->
+  <div class="modal fade" id="sendMailModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content p-4">
+      <div class="d-flex justify-content-between align-items-start mb-3">
+        <div>
+          <h5 class="fw-semibold mb-1">Send test mail</h5>
+          <p class="text-muted small mb-0">Insert a valid email address to get mail.</p>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Info Alert -->
+      <div class="alert alert-success d-flex align-items-center gap-2" role="alert">
+        <i class="fa-solid fa-circle-info"></i>
+        <span>SMTP is configured for mail. Please test to ensure you are receiving mail correctly.</span>
+      </div>
+
+      <!-- Input Section -->
+      <div class="mt-3">
+        <label class="form-label fw-semibold">Type mail address <span class="text-danger">*</span></label>
+        <div class="d-flex flex-nowrap gap-2">
+          <input type="email" class="form-control" placeholder="Ex: johon@email.com" required>
+          <button class="btn btn-success">Send mail</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ✅ Test SMS Modal -->
+<div class="modal fade" id="sendSmsModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content p-4">
+      <div class="d-flex justify-content-between align-items-start mb-3">
+        <div>
+          <h5 class="fw-semibold mb-1"><i class="fa-solid fa-message text-primary me-2"></i>Test SMS</h5>
+          <p class="text-muted small mb-0">Insert a valid phone number to get SMS.</p>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Success Alert -->
+      <div class="alert alert-success d-flex align-items-center gap-2 mb-4" role="alert" style="background:#e8f8ef; color:#198754;">
+        <i class="fa-solid fa-circle-check"></i>
+        <span>SMS is configured. Please test to ensure you are receiving messages correctly.</span>
+      </div>
+
+      <!-- Phone Input -->
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Phone Number <span class="text-danger">*</span></label>
+        <div class="input-group">
+          <select class="form-select" style="max-width:120px;">
+            <option selected>US +1</option>
+            <option>UK +44</option>
+            <option>IN +91</option>
+            <option>BD +880</option>
+          </select>
+          <input type="text" class="form-control" placeholder="0000000000">
+        </div>
+      </div>
+
+      <!-- Error Alert -->
+      <div class="alert d-flex align-items-center gap-2 mb-4" 
+           style="background:#fdecec; color:#e74c3c; border:1px solid #f5c2c7;">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <span>ERROR for site owner: Invalid key type</span>
+      </div>
+
+      <!-- Actions -->
+      <div class="d-flex justify-content-end gap-2">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-success">Send SMS</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ✅ Google reCAPTCHA Instruction Modal -->
+<div class="modal fade" id="recaptchaInstructionModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content p-5" 
+         style=" border-radius: 6px;">
+
+      <!-- Title -->
+      <div class="text-center mb-4">
+        <h5 class="fw-semibold mb-0" style="color: #27AE60;">
+          Google Recaptcha Instructions
+        </h5>
+      </div>
+
+      <!-- Step List -->
+      <div >
+        <ol class="text-dark lh-lg mb-0" style="font-size: 15px;">
+          <li>
+            1. To get site key and secret key Go to the Credentials page 
+            (<a href="https://www.google.com/recaptcha/admin" target="_blank" 
+               class="text-success text-decoration-none">Click here</a>)
+          </li>
+          <li>2. Add a label (Ex: abc company)</li>
+          <li>3. Select reCAPTCHA v3 as ReCAPTCHA Type</li>
+          <li>4. Select sub type: I'm not a robot checkbox</li>
+          <li>5. Add Domain (For ex: demo.6amtech.com)</li>
+          <li>6. Check in Accept the reCAPTCHA Terms of Service</li>
+          <li>7.Press Submit</li>
+          <li>8. Copy Site Key and Secret Key Paste in the input field below and Save.</li>
+        </ol>
+      </div>
+
+      <!-- Button -->
+      <div class="text-center mt-4" >
+        <button type="button" class="btn btn-success px-5" data-bs-dismiss="modal" 
+                style="border-radius: 4px;">Got it</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ✅ Google reCAPTCHA Instruction Modal -->
+<div class="modal fade" id="recaptchaInstructionModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content p-4" style="border-radius: 8px; background: #fff;">
+
+      <!-- Title -->
+      <div class="text-center mb-4">
+        <h5 class="fw-semibold mb-0" style="color: #27AE60;">
+          Google Recaptcha Instructions
+        </h5>
+      </div>
+
+      <!-- Step List -->
+      <div class="px-3">
+        <ol class="text-dark lh-lg mb-0 ps-4" style="font-size: 15px; list-style-position: inside;">
+          <li>To get site key and secret key, go to the Credentials page 
+            (<a href="https://www.google.com/recaptcha/admin" target="_blank" class="text-success text-decoration-none">Click here</a>)
+          </li>
+          <li>Add a label (Ex: abc company)</li>
+          <li>Select reCAPTCHA v3 as ReCAPTCHA Type</li>
+          <li>Select sub type: I'm not a robot checkbox</li>
+          <li>Add Domain (For ex: demo.6amtech.com)</li>
+          <li>Check in Accept the reCAPTCHA Terms of Service</li>
+          <li>Press Submit</li>
+          <li>Copy Site Key and Secret Key, paste in the input field below and Save.</li>
+        </ol>
+      </div>
+
+      <!-- Button -->
+      <div class="text-center mt-4">
+        <button type="button" class="btn btn-success px-5" data-bs-dismiss="modal" style="border-radius: 4px;">
+          Got it
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ✅ Map Modal -->
+<!-- ✅ Map Modal -->
+<div class="modal fade" id="mapViewModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content p-3" style="border-radius:10px;">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="fw-semibold mb-0">
+          <i class="fa-solid fa-map-location-dot text-success me-2"></i>Map View
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Map Container -->
+      <div id="mapContainer" style="height:550px; border-radius:8px;"></div>
+    </div>
+  </div>
+</div>
+
+
+
+
+  <!-- JS Libraries -->
+
+   <script src="../../assets/backend/js/vendor/jquery-3.7.1.min.js"></script>
+    <script src="../../assets/backend/js/app.js"></script> 
+    <script src="../../assets/backend/js/vendor/all.min.js"></script>
+    <script src="../../assets/backend/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/backend/js/vendor/swiper-bundle.min.js"></script>
+    <script src="../../assets/backend/js/vendor/chart-4.5.0.js"></script>
+    <script src="../../assets/backend/js/vendor/popper.min.js"></script>
+    
+    <script>
+            document.querySelectorAll('.view-toggle').forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                const box = this.closest('.content-box');
+                const extra = box.querySelector('.content-extra');
+                const arrow = this.querySelector('i');
+                const expanded = this.getAttribute('data-expanded') === 'true';
+
+                if (expanded) {
+                    extra.style.display = 'none';
+                    this.innerHTML = 'View <i class="fa-solid fa-arrow-down"></i>';
+                    this.setAttribute('data-expanded', 'false');
+                } else {
+                    extra.style.display = 'block';
+                    this.innerHTML = 'View <i class="fa-solid fa-arrow-up"></i>';
+                    this.setAttribute('data-expanded', 'true');
+                }
+                });
+            });
+
+            // Copy Callback URI
+            document.querySelectorAll('.copy-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                const input = this.previousElementSibling;
+                navigator.clipboard.writeText(input.value);
+                this.innerHTML = '<i class="fa-solid fa-check"></i>';
+                setTimeout(() => {
+                    this.innerHTML = '<i class="fa-regular fa-copy"></i>';
+                }, 1500);
+                });
+            });
+
+    </script>
+<script>
+const confirmModal = document.getElementById('ConfirmModal');
+const modalIcon = document.getElementById('confirmModalIcon');
+const modalTitle = document.getElementById('confirmModalTitle');
+const modalSubtitle = document.getElementById('confirmModalSubtitle');
+const confirmBtn = document.getElementById('modalConfirmBtn');
+
+let currentToggle = null;
+let intendedState = false;
+
+// ✅ Initialize all confirm-toggle inputs
+document.querySelectorAll('.confirm-toggle').forEach(toggle => {
+  // For radios — store initial checked state manually
+  if (toggle.type === "radio") toggle.dataset.checked = toggle.checked ? "true" : "false";
+
+  // --- ✅ Checkbox confirmation (toggle switches etc) ---
+  if (toggle.type === "checkbox") {
+    toggle.addEventListener("change", function (e) {
+      e.preventDefault();
+      currentToggle = this;
+      intendedState = this.checked;
+
+      // Revert immediately until user confirms
+      this.checked = !intendedState;
+
+      modalIcon.src = this.dataset.icon;
+      modalTitle.innerText = intendedState
+        ? this.dataset.titleOn
+        : this.dataset.titleOff;
+      modalSubtitle.innerText = intendedState
+        ? this.dataset.subtitleOn
+        : this.dataset.subtitleOff;
+
+      const bsModal = new bootstrap.Modal(confirmModal);
+      bsModal.show();
+
+      confirmBtn.onclick = () => {
+        currentToggle.checked = intendedState;
+        bsModal.hide();
+      };
+    });
+  }
+
+  // --- ✅ Radio confirmation (independent ON/OFF) ---
+  if (toggle.type === "radio") {
+    toggle.addEventListener("click", function (e) {
+      e.preventDefault(); // stop immediate toggle
+      currentToggle = this;
+
+      const isChecked = this.dataset.checked === "true";
+      intendedState = !isChecked; // toggle ON/OFF manually
+
+      modalIcon.src = this.dataset.icon;
+      modalTitle.innerText = intendedState
+        ? this.dataset.titleOn
+        : this.dataset.titleOff;
+      modalSubtitle.innerText = intendedState
+        ? this.dataset.subtitleOn
+        : this.dataset.subtitleOff;
+
+      const bsModal = new bootstrap.Modal(confirmModal);
+      bsModal.show();
+
+      confirmBtn.onclick = () => {
+        if (intendedState) {
+          this.checked = true;
+          this.dataset.checked = "true";
+        } else {
+          this.checked = false;
+          this.dataset.checked = "false";
+        }
+        bsModal.hide();
+      };
+    });
+  }
+});
+</script>
+
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const tabs = document.querySelectorAll(".pn-filter-bar a");
+  const contents = {
+    socialMediaTab: document.getElementById("socialMediaContent"),
+    mailConfigurTab: document.getElementById("mailConfigurcontent"),
+    smsConfigurTab: document.getElementById("smsConfigurContent"),
+    recaptchaTab: document.getElementById("recaptchaContent"),
+    googleMapTab: document.getElementById("googleMapContent"),
+    storageConnectionTab: document.getElementById("storageConnectionContent")
+  };
+
+  // 🔹 Function to hide all content
+  function hideAll() {
+    for (const key in contents) {
+      if (contents[key]) contents[key].style.display = "none";
+    }
+  }
+
+
+  function activateTab(tabId) {
+    document.querySelectorAll(".filter-item").forEach(el => el.classList.remove("active"));
+
+
+    hideAll();
+    if (contents[tabId]) contents[tabId].style.display = "block";
+
+
+    const activeTab = document.getElementById(tabId);
+    if (activeTab) activeTab.querySelector(".filter-item").classList.add("active");
+
+    localStorage.setItem("activeTab", tabId);
+  }
+
+  const savedTab = localStorage.getItem("activeTab");
+  if (savedTab && contents[savedTab]) {
+    activateTab(savedTab);
+  } else {
+    activateTab("socialMediaTab");
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener("click", function (e) {
+      e.preventDefault();
+      activateTab(this.id);
+    });
+  });
+});
+</script>
+
+<!-- Leaflet & Geocoder -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"/>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    let mapInitialized = false;
+
+    document.getElementById('mapViewModal').addEventListener('shown.bs.modal', function () {
+      if (!mapInitialized) {
+        const map = L.map('mapContainer').setView([23.8103, 90.4125], 6); // Dhaka default
+
+        
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 18,
+          attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+     
+        const marker = L.marker([23.8103, 90.4125], { draggable: true }).addTo(map);
+
+        
+        const coordBox = L.control({ position: 'bottomleft' });
+        coordBox.onAdd = function () {
+          this._div = L.DomUtil.create('div', 'coord-box');
+          this.update(marker.getLatLng());
+          return this._div;
+        };
+        coordBox.update = function (pos) {
+          this._div.innerHTML = `Lat: ${pos.lat.toFixed(4)} | Lng: ${pos.lng.toFixed(4)}`;
+        };
+        coordBox.addTo(map);
+
+        marker.on('drag', e => coordBox.update(e.latlng));
+
+        
+        const geocoder = L.Control.geocoder({
+          defaultMarkGeocode: false,
+          placeholder: "Search location..."
+        })
+        .on('markgeocode', function(e) {
+          const latlng = e.geocode.center;
+          marker.setLatLng(latlng);
+          map.setView(latlng, 10);
+          coordBox.update(latlng);
+        })
+        .addTo(map);
+
+        mapInitialized = true;
+      }
+    });
+  });
+</script>
+
+<style>
+.coord-box {
+  background: #fff;
+  padding: 6px 10px;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  font-size: 13px;
+  color: #333;
+}
+.leaflet-control-geocoder {
+  margin-top: 10px;
+}
+</style>
+
+
+</body>
+
+</html>
+
+

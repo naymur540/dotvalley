@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Multi-vendor E-commerce Platform">
+  <title>Business Setup</title>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../../assets/images/favicon.png" type="image/x-icon">
+
+  <!-- CSS Libraries -->
+  <link rel="stylesheet" href="../../assets/backend/css/vendor/all.min.css">
+  <link rel="stylesheet" href="../../assets/backend/css/vendor/bootstrap.min.css">
+  <link rel="stylesheet" href="../../assets/backend/css/vendor/swiper-bundle.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../../assets/backend/css/style.css">
+  <link rel="stylesheet" href="../../assets/backend/css/global.css">
+  <link rel="stylesheet" href="../../assets/backend/css/responsive.css">
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <!-- Leaflet Geocoder (Search Box) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+  <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+  <style>
+    .filter-item {
+        background: #f5f5f5;
+        border-radius: 8px;
+        padding: 12px 20px;
+        text-align: center;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all .3s;
+        box-shadow: 0 2px 6px rgba(0,0,0,.1);
+        white-space: nowrap; 
+        flex-shrink: 0; 
+    }
+    .filter-item:hover {
+        background: #e0e0e0;
+    }
+    .filter-item.active {
+        background: #fff;
+        
+    }
+
+    .pn-filter-bar::-webkit-scrollbar {
+      height: 6px;
+    }
+    .pn-filter-bar::-webkit-scrollbar-thumb {
+      background-color: rgba(0,0,0,0.2);
+      border-radius: 10px;
+    }
+
+    .payment-option {
+      cursor: pointer;
+      transition: border 0.3s ease-in-out, background 0.3s ease-in-out;
+    }
+
+    .payment-option:hover {
+      border-color: #0d6efd;
+    }
+
+    .modal-content {
+      border-radius: 12px;
+      padding: 30px 20px;
+      text-align: center;
+      border: none;
+    }
+
+    .modal-icon {
+      width: 100px;
+      height: auto;
+      margin: 0 auto 20px auto;
+    }
+
+    .modal-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #27ae60;
+      /* green */
+      margin-bottom: 10px;
+    }
+
+    .modal-subtitle {
+      font-size: 14px;
+      color: #777;
+      margin-bottom: 25px;
+    }
+
+    .btn-cancel {
+      background: #f1f1f1;
+      border: none;
+      color: #333;
+      font-weight: 500;
+      padding: 8px 25px;
+      border-radius: 6px;
+    }
+
+    .btn-ok {
+      background: #27ae60;
+      border: none;
+      color: #fff;
+      font-weight: 500;
+      padding: 8px 30px;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Dashboard Area Start -->
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-container">
+          <div class="logo-icon">
+            <i class="fa fa-shopping-cart"></i>
+          </div>
+          <span class="logo-text">Dotvalley</span>
+        </div>
+        <button class="sidebar-toggle"><i class="fa fa-bars"></i></button>
+      </div>
+      <div class="sidebar-search">
+        <div class="search-container">
+          <i class="fa fa-search search-icon"></i>
+          <input type="text" placeholder="Search menu">
+        </div>
+      </div>
+      <nav class="sidebar-menu">
+        <ul>
+          <li class="menu-item active">
+            <a href="dashboard.html">
+              <i class="fa fa-home"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="blank.html">
+              <i class="fa-solid fa-cart-shopping"></i>
+              <span>POS</span>
+            </a>
+          </li>
+
+          <li class="menu-section">Order Management</li>
+
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa fa-gift"></i>
+              <span>Orders</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item active">
+                <a href="all_order.html">
+                  <span>All</span>
+                  <span class="count">195</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="#orders-pending">
+                  <span>Pending</span>
+                  <span class="count">59</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="#orders-confirmed">
+                  <span>Confirmed</span>
+                  <span class="count">21</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="#orders-packaging">
+                  <span>Packaging</span>
+                  <span class="count">9</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="#orders-delivery">
+                  <span>Out for delivery</span>
+                  <span class="count">7</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="#orders-delivered">
+                  <span>Delivered</span>
+                  <span class="count delivered">80</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="#orders-returned">
+                  <span>Returned</span>
+                  <span class="count returned">4</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="#orders-failed">
+                  <span>Failed to Deliver</span>
+                  <span class="count failed">6</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="#orders-canceled">
+                  <span>Canceled</span>
+                  <span class="count canceled">6</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa-solid fa-money-bill-transfer"></i>
+              <span>Refund Requests</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="refund_request_pending.html">
+                  <span>Pending</span>
+                  <span class="count returned">12</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="refund_request_approved.html">
+                  <span>Approved</span>
+                  <span class="count delivered">5</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="refund_request_refunded.html">
+                  <span>Refunded</span>
+                  <span class="count returned">4</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="refund_request_rejected.html">
+                  <span>Rejected</span>
+                  <span class="count returned">3</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="menu-section">Product Management</li>
+
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa fa-th-large"></i>
+              <span>Category Setup</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="add_category.html">
+                  <span>Categories</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="add_subcategory.html">
+                  <span>Sub Categories</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa fa-tags"></i>
+              <span>Brands</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="brand_add.html">
+                  <span>Add New</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="brand_list.html">
+                  <span>List</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="menu-item">
+            <a href="attribute_setup.html">
+              <i class="fa-solid fa-sliders"></i>
+              <span>Product Attribute Setup</span>
+            </a>
+          </li>
+
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa fa-store"></i>
+              <span>In House Products</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="inhouse_product_list.html">
+                  <span>Product List</span>
+                  <span class="count delivered">8</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="inhouse_add_new_product.html">
+                  <span>Add New Product</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="inhouse_bulk_import.html">
+                  <span>Bulk Import</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="inhouse_request_restock_list.html">
+                  <span>Request Restock List</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa fa-user-tag"></i>
+              <span>Vendor Products</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="vendor_new_product_list.html">
+                  <span>New Products List</span>
+                  <span class="count returned">8</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="vendor_update_product_request.html">
+                  <span>Product Update Request</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="vendor_approve_product.html">
+                  <span>Approved Products</span>
+                  <span class="count delivered">8</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="menu-item">
+            <a href="product_gallery.html">
+              <i class="fa-solid fa-images"></i>
+              <span>Product Gallery</span>
+            </a>
+          </li>
+          <li class="menu-section">Promotion Management</li>
+          <li class="menu-item">
+            <a href="banner_setup.html">
+              <i class="fa-solid fa-play"></i>
+              <span>Banner Setup</span>
+            </a>
+          </li>
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa-regular fa-folder-open"></i>
+              <span>Offers & Deals</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="coupon.html">
+                  <span>Coupon</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="flash_deal.html">
+                  <span>Flash Deals</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="deal_of_the_day.html">
+                  <span>Deal of The Day</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa-solid fa-bell"></i>
+              <span>Notification</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="notification_send.html">
+                  <span>Send Notification</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="vendor_update_product_request.html">
+                  <span>Push Notification Setup</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="menu-item">
+            <a href="announcement.html">
+              <i class="fa-solid fa-bullhorn"></i>
+              <span>Announcement</span>
+            </a>
+          </li>
+          <li class="menu-section">User Management</li>
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa-solid fa-users"></i>
+              <span>Customers</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="customer_list.html">
+                  <span>Customer List</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="customer_review.html">
+                  <span>Customer Reviews</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="customer_wallet.html">
+                  <span>Wallet</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="customer_wallet_bonus_setup.html">
+                  <span>Wallet Bonus Setup</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="customer_loyality_point_report.html">
+                  <span>Loyality Points</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa-solid fa-user"></i>
+              <span>Vendors</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="vendor_add_new.html">
+                  <span>Add New Vendor</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="vendor_list.html">
+                  <span>Vendor List</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="vendor_withdraw.html">
+                  <span>Withdraws</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="vendor_withdraw_method_list.html">
+                  <span>Withdrawal Methods</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa-solid fa-truck-fast"></i>
+              <span>Delivery Man</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="delivery_add_new_man.html">
+                  <span>Add New</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="delivery_man_list.html">
+                  <span>List</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="delivery_man_withdraws.html">
+                  <span>Withdraws</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="delivery_man_emergency_contact.html">
+                  <span>Emergency Contact</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa-solid fa-user-group"></i>
+              <span>Employees</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="employee_role_setup.html">
+                  <span>Employees Role Setup</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="">
+                  <span>Employees</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="">
+                  <span>Add New</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="menu-section">Business Settings</li>
+          <li class="menu-item">
+            <a href="">
+              <i class="fa fa-solid fa-gear"></i>
+              <span>Business Setup</span>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="">
+              <i class="fa fa-solid fa-shop"></i>
+              <span>Inhouse Shop</span>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="">
+              <i class="fa fa-solid fa-magnifying-glass"></i>
+              <span>SEO Settings</span>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="">
+              <i class="fa fa-solid fa-screwdriver-wrench"></i>
+              <span>Priority Setup</span>
+            </a>
+          </li>
+          <li class="menu-item has-submenu">
+            <div class="menu-link">
+              <i class="fa-solid fa-photo-film"></i>
+              <span>Pages & Media</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="employee_role_setup.html">
+                  <span>System Setup</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="">
+                  <span>Login Settings</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="">
+                  <span>Email Template</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="">
+                  <span>Gallery</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="menu-item has-submenu bg-secondary-light">
+            <div class="menu-link">
+              <i class="fa-solid fa-sliders"></i>
+              <span>System Settings</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="ss_system_setup.html">
+                  <span>System Setup</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="ss_login_settings.html">
+                  <span>Login Settings</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="ss_email_template.html">
+                  <span>Email Template</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="">
+                  <span>Gallery</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="menu-item has-submenu bg-primary-light">
+            <div class="menu-link">
+              <i class="fa fa-solid fa-users-gear"></i>
+              <span>3rd Party Setup</span>
+              <i class="fa fa-chevron-down submenu-toggle"></i>
+            </div>
+            <ul class="submenu">
+              <li class="submenu-item">
+                <a href="3rd_digital_payment_setup.html">
+                  <span>Payment methods</span>
+                </a>
+              </li>
+              <li class="submenu-item">
+                <a href="3rd_firebase_configuration.html">
+                  <span>Firebase</span>
+                </a>
+              </li>
+              <li class="submenu-item ">
+                <a href="3rd_marketing_tools.html">
+                  <span>Marketing Tools</span>
+                </a>
+              </li>
+              
+            </ul>
+          </li>
+          <li class="menu-item logout-active my-3">
+            <div class="menu-link">
+              <i class="fa fa-right-from-bracket"></i>
+              <span>Logout</span>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+    <!-- Main Section Start -->
+    <main class="main-content">
+      <!-- Dashboard Header Section Start -->
+      <header class="dashboard-header">
+        <div class="header-search-section">
+          <div class="search-container">
+            <input type="text" class="search-product" placeholder="Search product">
+            <button class="search-btn">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button class="action-btn" title="Language">
+            <i class="fa fa-globe"></i>
+          </button>
+          <button class="action-btn" title="Country">
+            <img src="../../assets/backend/images/flags/us.png" alt="EN" class="flag-icon">
+          </button>
+          <button class="action-btn" title="Messages">
+            <i class="fa fa-comments"></i>
+            <span class="notification-badge">3</span>
+          </button>
+          <button class="action-btn" title="Orders">
+            <i class="fa fa-shopping-bag"></i>
+            <span class="notification-badge">1</span>
+          </button>
+          <div class="user-dropdown">
+            <button class="action-btn user-btn" title="User Profile">
+              <i class="fa fa-user"></i>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-header">
+                <img src="../../assets/backend/images/admin.png" alt="Admin" class="user-avatar">
+                <div class="user-info">
+                  <h6>Admin User</h6>
+                  <span>admin@dotvalley.com</span>
+                </div>
+              </div>
+              <div class="dropdown-divider"></div>
+              <a href="https://facebook.com" class="dropdown-item">
+                <i class="fa fa-user-circle"></i>
+                <span>Update Profile</span>
+              </a>
+              <a href="https://youtube.com" class="dropdown-item">
+                <i class="fa fa-cog"></i>
+                <span>Settings</span>
+              </a>
+              <a href="#help" class="dropdown-item">
+                <i class="fa fa-question-circle"></i>
+                <span>Help & Support</span>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#logout" class="dropdown-item logout-item">
+                <i class="fa fa-sign-out-alt"></i>
+                <span>Logout</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </header>
+      <!-- Dashboard Header Section End -->
+      <section id="businessSetup" class="pg-wrap container my-4 buiness-setup-section">
+        <!-- Header -->
+        <div class="all-orders">
+          <header class="d-flex justify-content-between align-items-center mb-4">
+            <div class="header-title">
+              <img src="../../assets/backend/images/bussnesssetup.png" alt="Gallery">
+              <h1>Business Setup</h1>
+            </div>
+          </header>
+        </div>
+        <!-- Filters/Search -->
+       <div class="pn-filter-bar d-flex flex-nowrap overflow-auto gap-3 py-3">
+          <a href="/pages/backend/business_setup.html" class="text-decoration-none">
+            <div class="filter-item active">General</div>
+          </a>
+
+          <a href="/pages/backend/websitesetup.html" class="text-decoration-none">
+            <div class="filter-item">Website Setup</div>
+          </a>
+
+          <a href="/pages/backend/vendor_setup.html" class="text-decoration-none">
+            <div class="filter-item">Vendor</div>
+          </a>
+
+          <a href="/pages/backend/products_setup.html" class="text-decoration-none">
+            <div class="filter-item">Product</div>
+          </a>
+
+          <a href="/pages/backend/delivery_man_setup.html" class="text-decoration-none">
+            <div class="filter-item">Delivery Men</div>
+          </a>
+
+          <a href="/pages/backend/customer_setup.html" class="text-decoration-none">
+            <div class="filter-item">Customer</div>
+          </a>
+
+          <a href="/pages/backend/orders_setup.html" class="text-decoration-none">
+            <div class="filter-item">Orders</div>
+          </a>
+
+          <a href="/pages/backend/shipping_methode_setup.html" class="text-decoration-none">
+            <div class="filter-item">Shipping Method</div>
+          </a>
+
+          <a href="/pages/backend/delivery_zone_setup.html" class="text-decoration-none">
+            <div class="filter-item">Delivery Zone</div>
+          </a>
+
+          <a href="/pages/backend/invoice_setup.html" class="text-decoration-none">
+            <div class="filter-item">Invoice</div>
+          </a>
+
+          <a href="/pages/backend/refund_setup.html" class="text-decoration-none">
+            <div class="filter-item">Refund</div>
+          </a>
+      </div>
+
+
+        
+
+
+
+
+   
+
+
+
+        <div class=" card-custom">
+          <h6 class="fw-bold">Basic Information</h6>
+          <p class="text-muted small">Here you setup your all business information.</p>
+
+          <div class="row g-4 mb-4">
+            <div class="col-md-6">
+              <label class="form-label">Company Name *</label>
+              <input type="text" class="form-control" placeholder="Dot velly">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Email *</label>
+              <input type="email" class="form-control" placeholder="copy@DotVelly.com">
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">Phone *</label>
+              <div class="input-group">
+                <select class="form-select" style="max-width: 120px;">
+                  <option>BD+880</option>
+                  <option>US+1</option>
+                  <option>IN+91</option>
+                </select>
+                <input type="text" class="form-control" placeholder="Ex: 017xxxxxxxx">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Country *</label>
+              <select class="form-select">
+                <option selected>United States</option>
+                <option>Bangladesh</option>
+                <option>India</option>
+                <option>United Kingdom</option>
+              </select>
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">Time Zone *</label>
+              <select class="form-select">
+                <option>(GMT+11:00) Vladivostok</option>
+                <option>(GMT+6:00) Dhaka</option>
+                <option>(GMT+5:30) Kolkata</option>
+                <option>(GMT+8:00) Singapore</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Pagination *</label>
+              <input type="number" class="form-control" placeholder="25">
+            </div>
+          </div>
+          <!-- map section -->
+          <div class="map-section">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <ul class="nav nav-tabs border-0">
+                <li class="nav-item">
+                  <a class="nav-link active" href="#">Map</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Satellite</a>
+                </li>
+              </ul>
+            </div>
+
+            <div id="map" style="position: relative; height: 292px; width: 100%; background:#eaeaea;">
+              <div
+                style="position: absolute; bottom: 10px; left: 10px; background: rgba(255,255,255,0.9); 
+                        padding: 8px 12px; border-radius: 6px; font-size: 14px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
+                Lat : <span id="latitude">23.8103</span><br>
+                Long : <span id="longitude">90.4125</span>
+              </div>
+            </div>
+
+            <div class="alert alert-success mt-3 d-flex align-items-center" role="alert">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
+                <path
+                  d="M3.19361 0.808594L2.48961 1.51159L3.53711 2.55859L4.24011 1.85559L3.19361 0.808594ZM12.3811 0.808594L11.3336 1.85559L12.0371 2.55859L13.0841 1.51209L12.3811 0.808594ZM7.78711 1.12059C7.62211 1.12193 7.45544 1.13259 7.28711 1.15259H7.27211C5.24411 1.38509 3.63011 3.02359 3.34961 5.04259C3.12561 6.66759 3.79561 8.14109 4.91211 9.09009C5.36875 9.47992 5.67765 10.0148 5.78711 10.6051V13.6051H6.92711C7.10111 13.9036 7.41861 14.1051 7.78711 14.1051C8.15561 14.1051 8.47311 13.9036 8.64711 13.6051H9.78711V11.6051H9.83411V11.0111C9.83411 10.2781 10.2151 9.53909 10.8341 8.96459C11.6621 8.13559 12.2871 6.95809 12.2871 5.60559C12.2871 3.13559 10.2541 1.09759 7.78711 1.12059ZM7.78711 2.12059C9.71961 2.09359 11.2871 3.67559 11.2871 5.60559C11.2871 6.65259 10.8021 7.57459 10.1306 8.24559L10.1466 8.26159C9.47957 8.87715 9.04812 9.7061 8.92661 10.6056H6.73961C6.62961 9.74859 6.26211 8.91909 5.56761 8.32409C4.68411 7.57409 4.15761 6.44409 4.33361 5.16809C4.55211 3.59309 5.83011 2.32659 7.39611 2.15309C7.52541 2.13516 7.65561 2.12448 7.78611 2.12109L7.78711 2.12059ZM0.787109 5.60559V6.60559H2.28711V5.60559H0.787109ZM13.2871 5.60559V6.60559H14.7871V5.60559H13.2871ZM3.53711 9.65259L2.49011 10.6991L3.19361 11.4026L4.23961 10.3556L3.53711 9.65259ZM12.0371 9.65259L11.3341 10.3556L12.3806 11.4026L13.0841 10.6991L12.0371 9.65259ZM6.78711 11.6056H8.78711V12.6056H6.78711V11.6056Z"
+                  fill="#27AE60" />
+              </svg>
+              For the address setup you can simply drag the map to pick for the perfect
+              <b>Lat(Latitude)</b> & <b>Long(Longitude)</b> Value.
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+        <div class="bs-filter-bar row g-3 mb-3 card-custom">
+          <h6 class="fw-bold alert-success">General Setup</h6>
+          <p class="text-muted small">Here you can manage currency settings to match with your business criteria.</p>
+        </div>
+
+        <!-- currency setup -->
+        <div class="bs-filter-bar row g-3 mb-5 card-custom">
+          <h6 class="fw-bold  ">Currency Setup</h6>
+          <p class="text-muted small">Here you can manage currency settings to match with your business criteria.</p>
+          <div class="row g-4">
+            <!-- Currency Select -->
+            <div class="col-md-4">
+              <label class="form-label">Select Currency *</label>
+              <select class="form-select">
+                <option>USD</option>
+                <option>BDT</option>
+                <option>INR</option>
+                <option>EUR</option>
+              </select>
+            </div>
+
+            <!-- ✅ Currency Position with Radio & Border -->
+            <div class="col-md-4">
+              <label class="form-label">Currency Position *</label>
+              <div class="form-control d-flex align-items-center justify-content-between">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="currency_position" id="left" checked>
+                  <label class="form-check-label" for="left">($) Left</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="currency_position" id="right">
+                  <label class="form-check-label" for="right">($) Right</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Decimal Digits -->
+            <div class="col-md-4">
+              <label class="form-label">Digit After Decimal Point *</label>
+              <input type="number" class="form-control" value="2">
+            </div>
+            <div class="alert alert-success mt-3 d-flex align-items-center" role="alert">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
+                <path
+                  d="M3.19361 0.808594L2.48961 1.51159L3.53711 2.55859L4.24011 1.85559L3.19361 0.808594ZM12.3811 0.808594L11.3336 1.85559L12.0371 2.55859L13.0841 1.51209L12.3811 0.808594ZM7.78711 1.12059C7.62211 1.12193 7.45544 1.13259 7.28711 1.15259H7.27211C5.24411 1.38509 3.63011 3.02359 3.34961 5.04259C3.12561 6.66759 3.79561 8.14109 4.91211 9.09009C5.36875 9.47992 5.67765 10.0148 5.78711 10.6051V13.6051H6.92711C7.10111 13.9036 7.41861 14.1051 7.78711 14.1051C8.15561 14.1051 8.47311 13.9036 8.64711 13.6051H9.78711V11.6051H9.83411V11.0111C9.83411 10.2781 10.2151 9.53909 10.8341 8.96459C11.6621 8.13559 12.2871 6.95809 12.2871 5.60559C12.2871 3.13559 10.2541 1.09759 7.78711 1.12059ZM7.78711 2.12059C9.71961 2.09359 11.2871 3.67559 11.2871 5.60559C11.2871 6.65259 10.8021 7.57459 10.1306 8.24559L10.1466 8.26159C9.47957 8.87715 9.04812 9.7061 8.92661 10.6056H6.73961C6.62961 9.74859 6.26211 8.91909 5.56761 8.32409C4.68411 7.57409 4.15761 6.44409 4.33361 5.16809C4.55211 3.59309 5.83011 2.32659 7.39611 2.15309C7.52541 2.13516 7.65561 2.12448 7.78611 2.12109L7.78711 2.12059ZM0.787109 5.60559V6.60559H2.28711V5.60559H0.787109ZM13.2871 5.60559V6.60559H14.7871V5.60559H13.2871ZM3.53711 9.65259L2.49011 10.6991L3.19361 11.4026L4.23961 10.3556L3.53711 9.65259ZM12.0371 9.65259L11.3341 10.3556L12.3806 11.4026L13.0841 10.6991L12.0371 9.65259ZM6.78711 11.6056H8.78711V12.6056H6.78711V11.6056Z"
+                  fill="#27AE60" />
+              </svg>
+              You can also set up your default and multiple currency from Currency Setup.
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ✅ Business Model Setup -->
+        <div class="bs-filter-bar row g-3 mb-5 card-custom">
+          <h6 class="fw-bold">Business Model Setup</h6>
+          <p class="text-muted small">Here you can setup which type of business model you want to sell your products.
+            You can choose only one option at a time.</p>
+
+          <div class="row g-4">
+            <!-- Single Vendor -->
+            <div class="col-md-6">
+              <div
+                class="form-control p-3 d-flex flex-column justify-content-between h-100 border rounded business-option"
+                id="singleCard">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="business_model" id="singleVendor" value="single">
+                  <label class="form-check-label fw-semibold" for="singleVendor">Single Vendor</label>
+                  <p class="small text-muted mb-0">Sell products exclusively from your in-house shops only.</p>
+                </div>
+                <div class="alert alert-warning mt-3 py-2 px-3 small">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23" fill="none">
+                    <path
+                      d="M11.4609 21.9619C16.9838 21.9619 21.4609 17.4848 21.4609 11.9619C21.4609 6.43907 16.9838 1.96191 11.4609 1.96191C5.93809 1.96191 1.46094 6.43907 1.46094 11.9619C1.46094 17.4848 5.93809 21.9619 11.4609 21.9619Z"
+                      fill="#FCBA4A" stroke="#FCBA4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M11.4609 12.1426V16.1426" stroke="white" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                    <path d="M11.4609 7.78223L11.4609 8.14258" stroke="white" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                  You can change setup of your shop from here
+                  <a href="#">In house Shop Settings</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Multi Vendor -->
+            <div class="col-md-6">
+              <div
+                class="form-control p-3 d-flex flex-column justify-content-between h-100 border rounded business-option active"
+                id="multiCard">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="business_model" id="multiVendor" value="multi"
+                    checked>
+                  <label class="form-check-label fw-semibold" for="multiVendor">Multi Vendor</label>
+                  <p class="small text-muted mb-0">Alongside your store, multiple vendors can register and open their
+                    store.</p>
+                </div>
+                <div class="alert alert-success mt-3 py-2 px-3 small">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="21" viewBox="0 0 18 21" fill="none">
+                    <path
+                      d="M3.0853 0.794922L2.18958 1.8171L3.52235 3.33947L4.41679 2.31729L3.0853 0.794922ZM14.7748 0.794922L13.4421 2.31729L14.3372 3.33947L15.6693 1.81783L14.7748 0.794922ZM8.92975 1.24858C8.71982 1.25052 8.50776 1.26603 8.29359 1.29511H8.2745C5.69421 1.63317 3.64067 4.0156 3.28378 6.95128C2.99878 9.31408 3.85124 11.4566 5.2718 12.8365C5.8528 13.4033 6.24582 14.1809 6.38509 15.0393V19.4014H7.83555C8.05693 19.8354 8.4609 20.1284 8.92975 20.1284C9.39861 20.1284 9.80257 19.8354 10.024 19.4014H11.4744V16.4934H11.5342V15.6297C11.5342 14.5639 12.019 13.4893 12.8065 12.654C13.86 11.4486 14.6552 9.73647 14.6552 7.7699C14.6552 4.17845 12.0686 1.21514 8.92975 1.24858ZM8.92975 2.70261C11.3885 2.66335 13.3829 4.96362 13.3829 7.7699C13.3829 9.29227 12.7658 10.6329 11.9115 11.6085L11.9318 11.6318C11.0831 12.5268 10.5342 13.7322 10.3796 15.04H7.59698C7.45703 13.7939 6.98945 12.5878 6.10581 11.7227C4.98171 10.6322 4.31183 8.9891 4.53576 7.13376C4.81376 4.84367 6.4398 3.00214 8.43227 2.74986C8.59678 2.72379 8.76245 2.70826 8.92848 2.70334L8.92975 2.70261ZM0.0234375 7.7699V9.22393H1.93193V7.7699H0.0234375ZM15.9276 7.7699V9.22393H17.8361V7.7699H15.9276ZM3.52235 13.6544L2.19022 15.176L3.0853 16.1989L4.41616 14.6765L3.52235 13.6544ZM14.3372 13.6544L13.4427 14.6765L14.7742 16.1989L15.6693 15.176L14.3372 13.6544ZM7.65742 16.4941H10.2021V17.9481H7.65742V16.4941Z"
+                      fill="#27AE60" />
+                  </svg>
+                  After turn on you can setup more setting for other vendors from
+                  <a href="#">vendors settings</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Default Commission -->
+          <div class=" mt-4">
+            <label for="commission" class="form-label fw-bold">Default Commission *</label>
+            <input type="number" class="form-control" id="commission" value="15" placeholder="Enter default commission">
+          </div>
+        </div>
+
+        <div class="bs-filter-bar row g-3 mb-5 card-custom">
+          <h6 class="fw-bold">Payment Options</h6>
+          <p class="text-muted small">Enable preferred payment methods to make payments from customer app and website
+          </p>
+
+          <!-- Payment Options -->
+          <div class="row g-3">
+            <div class="col-md-4 d-flex">
+              <div
+                class="form-control p-3 d-flex flex-column justify-content-between border rounded payment-option h-100 w-100">
+                <div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="cod" checked>
+                    <label class="form-check-label fw-semibold" for="cod">Cash on delivery</label>
+                  </div>
+                  <p class="small text-muted mb-0">Enabling cash on delivery (COD) will make it available as a payment
+                    option for customers during the checkout process.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 d-flex">
+              <div
+                class="form-control p-3 d-flex flex-column justify-content-between border rounded payment-option h-100 w-100">
+                <div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="digital" checked>
+                    <label class="form-check-label fw-semibold" for="digital">Digital payment</label>
+                  </div>
+                  <p class="small text-muted mb-0">Enabling digital payment will make it available as a payment option
+                    for customers during the checkout process.
+                    <a href="#">Digital payment methods</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 d-flex">
+              <div
+                class="form-control p-3 d-flex flex-column justify-content-between border rounded payment-option h-100 w-100">
+                <div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="offline" checked>
+                    <label class="form-check-label fw-semibold" for="offline">Offline payment</label>
+                  </div>
+                  <p class="small text-muted mb-0">Enabling offline payment will make it available as a payment option
+                    for customers during the checkout process.
+                    <a href="#">Offline payment methods</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Copyright & Cookies Text -->
+        <div class="bs-filter-bar row g-3 mb-5 card-custom">
+          <h6 class="fw-bold">Copyright & Cookies Text</h6>
+          <p class="text-muted small">Add the necessary texts to display in required sections</p>
+
+          <div class="row g-4">
+            <!-- Copyright Text -->
+            <div class="col-md-6">
+              <label for="copyright" class="form-label">Copyright Text *</label>
+              <textarea id="copyright" class="form-control" rows="2" maxlength="100"
+                placeholder="Copyright 6amTech@2021"></textarea>
+              <div id="copyrightCount" class="small text-muted mt-1">22/100</div>
+            </div>
+
+            <!-- Cookies Text with Switch -->
+            <div class="col-md-6">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <label for="cookies" class="form-label">Cookies Text *</label>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" id="cookieSwitch" checked>
+                </div>
+              </div>
+              <textarea id="cookies" class="form-control" rows="2" maxlength="100"
+                placeholder="By clicking “Yes, I agree”, you agree to store cookies on your device and disclose information in accordance with our privacy policy."></textarea>
+              <div id="cookiesCount" class="small text-muted mt-1">100/100</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Buttons -->
+        <div class="d-flex justify-content-end mt-4">
+          <button type="reset" class="btn btn-light me-2">Reset</button>
+          <button type="submit" class="btn btn-success">Save</button>
+        </div>
+
+
+
+      </section>
+
+
+    </main>
+
+
+    <!-- Maintenance Modal -->
+    <div class="modal fade" id="maintenanceModal" tabindex="-1" aria-labelledby="maintenanceModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h5 class="modal-title fw-bold" id="maintenanceModalLabel">System Maintenance</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <div class="modal-body">
+            <!-- Your maintenance form content -->
+            <div class="d-flex justify-content-between align-items-start mb-4">
+              <div>
+                <h6 class="fw-bold mb-1">Maintenance Mode</h6>
+                <p class="text-muted small mb-0" style="max-width: 500px;">
+                  Turn on the maintenance mode will temporarily deactivate your selected systems
+                  as of your chosen date and time.
+                </p>
+              </div>
+              <div class="d-flex align-items-center">
+                <label for="modalMaintenanceMode" class="me-2 fw-semibold">Maintenance Mode</label>
+                <div class="form-check form-switch m-0">
+                  <!-- Changed id here -->
+                  <input class="form-check-input" type="checkbox" id="modalMaintenanceMode">
+                </div>
+              </div>
+            </div>
+
+            <!-- Select Systems -->
+            <div class="card p-3 mb-4">
+              <h6 class="fw-bold mb-2">Select System</h6>
+              <div class="d-flex flex-wrap gap-3">
+                <div class="form-check"><input type="checkbox" class="form-check-input" id="allSystem"><label
+                    class="form-check-label" for="allSystem">All System</label></div>
+                <div class="form-check"><input type="checkbox" class="form-check-input" id="userApp"><label
+                    class="form-check-label" for="userApp">User App</label></div>
+                <div class="form-check"><input type="checkbox" class="form-check-input" id="userWebsite"><label
+                    class="form-check-label" for="userWebsite">User Website</label></div>
+                <div class="form-check"><input type="checkbox" class="form-check-input" id="deliverymanApp"><label
+                    class="form-check-label" for="deliverymanApp">Deliveryman App</label></div>
+                <div class="form-check"><input type="checkbox" class="form-check-input" id="vendorPanel"><label
+                    class="form-check-label" for="vendorPanel">Vendor Panel</label></div>
+                <div class="form-check"><input type="checkbox" class="form-check-input" id="vendorApp"><label
+                    class="form-check-label" for="vendorApp">Vendor App</label></div>
+              </div>
+            </div>
+
+            <!-- Maintenance Date and Time -->
+            <div class="card p-3 mb-4">
+              <h6 class="fw-bold mb-2">Maintenance Date and Time</h6>
+              <div class="mb-3">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="duration" id="24h">
+                  <label class="form-check-label" for="24h">For 24 Hours</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="duration" id="1week">
+                  <label class="form-check-label" for="1week">For 1 Week</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="duration" id="untilChange" checked>
+                  <label class="form-check-label" for="untilChange">Until I Change</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="duration" id="customize">
+                  <label class="form-check-label" for="customize">Customize</label>
+                </div>
+              </div>
+
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label">Start Date</label>
+                  <input type="date" class="form-control">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">End Date</label>
+                  <input type="date" class="form-control">
+                </div>
+              </div>
+            </div>
+
+            <a href="#" class="text-success small fw-semibold">Advance Feature</a>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-success" id="saveMaintenance">Save</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- cookie modal -->
+    <div class="modal fade" id="confirmModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-3">
+
+          <!-- Icon -->
+          <img src="/assets/backend/images/cookie-off.png" alt="Checklist Icon" class="modal-icon">
+
+          <!-- Title -->
+          <div class="modal-title">Do you want to ENABLE Cookies?</div>
+
+          <!-- Subtitle -->
+          <div class="modal-subtitle">
+            If enabled, cookies will be stored on the user device.
+          </div>
+
+          <!-- Buttons -->
+          <div class="d-flex justify-content-center gap-3 mb-3">
+            <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-ok">OK</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- Main Section End -->
+  </div>
+  <!-- Dashboard Area End -->
+
+  <!-- JS Libraries -->
+  <script src="../../assets/backend/js/vendor/jquery-3.7.1.min.js"></script>
+  <script src="../../assets/backend/js/app.js"></script>
+  <script src="../../assets/backend/js/vendor/all.min.js"></script>
+  <script src="../../assets/backend/js/vendor/bootstrap.min.js"></script>
+  <script src="../../assets/backend/js/vendor/swiper-bundle.min.js"></script>
+  <script src="../../assets/backend/js/vendor/chart-4.5.0.js"></script>
+
+  <script>
+
+    // Toggle active state when selecting
+    const singleCard = document.getElementById('singleCard');
+    const multiCard = document.getElementById('multiCard');
+    const singleRadio = document.getElementById('singleVendor');
+    const multiRadio = document.getElementById('multiVendor');
+
+    singleCard.addEventListener('click', () => {
+      singleRadio.checked = true;
+      singleCard.classList.add('active');
+      multiCard.classList.remove('active');
+    });
+
+    multiCard.addEventListener('click', () => {
+      multiRadio.checked = true;
+      multiCard.classList.add('active');
+      singleCard.classList.remove('active');
+    });
+
+
+  </script>
+  <script>
+    const mainSwitch = document.getElementById('maintenanceMode'); // main checkbox
+    const modalEl = document.getElementById('maintenanceModal');
+    const modalSwitch = document.getElementById('modalMaintenanceMode'); // modal checkbox
+    const bsModal = new bootstrap.Modal(modalEl);
+
+    let lastMainState = mainSwitch.checked; // store last saved state
+
+    // When main switch clicked → open modal (don't change state yet)
+    mainSwitch.addEventListener('change', function () {
+      // Restore modal switch to current saved state
+      modalSwitch.checked = lastMainState;
+      bsModal.show();
+
+      // Reset main switch visual to previous state until Save
+      this.checked = lastMainState;
+    });
+
+    // If Save clicked → sync modal state to main switch
+    document.getElementById('saveMaintenance').addEventListener('click', function () {
+      lastMainState = modalSwitch.checked; // save new state
+      mainSwitch.checked = lastMainState;  // update main switch
+      bsModal.hide();
+    });
+
+    // If Cancel / Close modal → do nothing, main stays same
+    modalEl.addEventListener('hidden.bs.modal', function () {
+      mainSwitch.checked = lastMainState; // restore last saved state
+    });
+  </script>
+  <script>
+    const cookieSwitch = document.getElementById('cookieSwitch');
+    const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+    const modalTitle = document.querySelector('#confirmModal .modal-title');
+    const modalSubtitle = document.querySelector('#confirmModal .modal-subtitle');
+    const okBtn = document.querySelector('#confirmModal .btn-ok');
+
+    let lastCookieState = cookieSwitch.checked; // store saved state
+    let targetState = lastCookieState; // what user clicked
+
+    // When user clicks the cookie toggle → show modal
+    cookieSwitch.addEventListener('change', function () {
+      targetState = this.checked;
+      // reset switch until Save
+      this.checked = lastCookieState;
+
+      // update modal text
+      if (targetState) {
+        modalTitle.textContent = "Do you want to ENABLE Cookies?";
+        modalSubtitle.textContent = "If enabled, cookies will be stored on the user device.";
+      } else {
+        modalTitle.textContent = "Do you want to DISABLE Cookies?";
+        modalSubtitle.textContent = "If disabled, cookies will not be stored on the user device.";
+      }
+
+      confirmModal.show();
+    });
+
+    // If OK clicked → apply change
+    okBtn.addEventListener('click', function () {
+      lastCookieState = targetState;
+      cookieSwitch.checked = lastCookieState;
+      confirmModal.hide();
+    });
+
+    // If Cancel or modal closed → revert to old state
+    document.querySelector('#confirmModal .btn-cancel').addEventListener('click', function () {
+      cookieSwitch.checked = lastCookieState;
+    });
+    document.getElementById('confirmModal').addEventListener('hidden.bs.modal', function () {
+      cookieSwitch.checked = lastCookieState;
+    });
+  </script>
+
+
+  <script>
+    function updateCount(id, counterId, max) {
+      const textarea = document.getElementById(id);
+      const counter = document.getElementById(counterId);
+
+      textarea.addEventListener("input", () => {
+        const len = textarea.value.length;
+        if (len >= max) {
+          counter.textContent = `${max}/${max}`;
+        } else {
+          counter.textContent = `${len}/${max}`;
+        }
+      });
+
+      // Initialize on page load
+      counter.textContent = `${textarea.value.length}/${max}`;
+    }
+
+    updateCount("copyright", "copyrightCount", 100);
+    updateCount("cookies", "cookiesCount", 100);
+  </script>
+  <script>
+    // Initialize map
+    var map = L.map('map').setView([21.6916, 90.4125], 5);
+
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Draggable marker
+    var marker = L.marker([23.8103, 78.8060], { draggable: true }).addTo(map);
+
+    // Update coordinates when dragging
+    marker.on('dragend', function (e) {
+      var latlng = marker.getLatLng();
+      document.getElementById('latitude').textContent = latlng.lat.toFixed(6);
+      document.getElementById('longitude').textContent = latlng.lng.toFixed(6);
+    });
+
+    // Search box
+    var geocoder = L.Control.geocoder({
+      defaultMarkGeocode: false
+    })
+      .on('markgeocode', function (e) {
+        var center = e.geocode.center;
+        map.setView(center, 13);
+        marker.setLatLng(center);
+        document.getElementById('latitude').textContent = center.lat.toFixed(6);
+        document.getElementById('longitude').textContent = center.lng.toFixed(6);
+      })
+      .addTo(map);
+
+    // Locate Me function
+    function locateMe() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          var lat = position.coords.latitude;
+          var lng = position.coords.longitude;
+          var userLocation = [lat, lng];
+
+          // Move map to user location
+          map.setView(userLocation, 13);
+
+          // Move marker
+          marker.setLatLng(userLocation);
+
+          // Update coords display
+          document.getElementById('latitude').textContent = lat.toFixed(6);
+          document.getElementById('longitude').textContent = lng.toFixed(6);
+
+          // Add a circle to highlight location
+          L.circle(userLocation, {
+            radius: 100,
+            color: 'blue',
+            fillColor: '#3f90ff',
+            fillOpacity: 0.3
+          }).addTo(map);
+        }, function (error) {
+          alert("Unable to retrieve your location.");
+        });
+      } else {
+        alert("Geolocation is not supported by this browser.");
+      }
+    }
+  </script>
+</body>
+
+</html>
